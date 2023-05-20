@@ -1,3 +1,5 @@
+[![CI](https://github.com/andrelouw/app-template/actions/workflows/ci.yml/badge.svg)](https://github.com/andrelouw/app-template/actions/workflows/ci.yml)
+
 # App Template
 This is a basic App template to get up and running with `iOS` or `macOS` projects quickly.
 
