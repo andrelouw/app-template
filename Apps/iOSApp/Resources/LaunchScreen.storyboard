@@ -24,6 +24,7 @@
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="T5u-Y4-QfC">
                                 <rect key="frame" x="178" y="420" width="37" height="37"/>
+                                <color key="color" name="font.primary"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
@@ -45,6 +46,9 @@
     <resources>
         <namedColor name="AccentColor">
             <color red="0.41568627450980394" green="0.83137254901960789" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="font.primary">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
