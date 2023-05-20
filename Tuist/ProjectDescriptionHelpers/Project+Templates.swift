@@ -2,12 +2,12 @@ import ProjectDescription
 
 extension Project {
     public static func bundleID(name: String) -> String {
-        "app.template.\(name)"
+      "\(ProjectConfiguration.bundleID).\(ProjectConfiguration.appName.lowercased())"
     }
 
     public static func app(name: String, platform: Platform, dependencies: [TargetDependency] = []) -> Project {
         project(name: name, product: .app, platform: platform, dependencies: dependencies, infoPlist: [
-            "CFBundleShortVersionString": "1.0",
+            "CFBundleShortVersionString": "0.1.0",
             "CFBundleVersion": "1",
         ])
     }
