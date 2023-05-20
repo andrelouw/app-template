@@ -21,6 +21,11 @@
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 public enum MyAppAsset {
   public static let accentColor = MyAppColors(name: "AccentColor")
+  public static let brandPrimary = MyAppColors(name: "brand.primary")
+  public static let brandSecondary = MyAppColors(name: "brand.secondary")
+  public static let brandTertiary = MyAppColors(name: "brand.tertiary")
+  public static let fontPrimary = MyAppColors(name: "font.primary")
+  public static let fontSecondary = MyAppColors(name: "font.secondary")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
