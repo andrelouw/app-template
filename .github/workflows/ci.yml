@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push: 
+    branches: 
+      - develop
+
+jobs: 
+  build:
+    name: Build Workspace
+    runs-on: macos-latest
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v3
+
+      - name: Build Project
+        uses: tuist/tuist-action@0.13.0
+        with:
+          command: 'build'
+          arguments: ''
