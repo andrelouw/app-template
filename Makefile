@@ -1,2 +1,4 @@
 bootstrap:
-	curl -Ls https://install.tuist.io | bash
+	@./Scripts/tuist.sh
+	@./Scripts/rename.sh
+
