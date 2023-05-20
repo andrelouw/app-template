@@ -88,3 +88,9 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+# Xcode Project and Workspace
+#
+# When using tuist to generate `.xcodeproj` and `.xcodeworkspace` files, it is best to not commit them.
+*.xcodeproj
+*.xcodeworkspace
