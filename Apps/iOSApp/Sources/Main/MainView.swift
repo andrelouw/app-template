@@ -6,13 +6,14 @@ struct MainView: View {
       MyAppAsset.brandPrimary.swiftUIColor
         .ignoresSafeArea()
       VStack {
-        Text("Welcome to")
+        Text(MyAppStrings.welcomeMessage)
           .font(.headline)
           .foregroundColor(MyAppAsset.fontSecondary.swiftUIColor)
         Text(Bundle.main.displayName ?? "App")
           .font(.largeTitle)
           .foregroundColor(MyAppAsset.fontPrimary.swiftUIColor)
       }
+      .offset(y: -100)
     }
   }
 }
