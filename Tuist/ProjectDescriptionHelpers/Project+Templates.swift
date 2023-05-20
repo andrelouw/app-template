@@ -1,7 +1,7 @@
 import ProjectDescription
 
 extension Project {
-  // TODO: Allow multiple platforms
+  // TODO: Derive app name from platform
   public static func app(
     name: String,
     platform: Platform,
@@ -26,45 +26,30 @@ extension Project {
       ]
     )
   }
-}
 
-extension Target {
-  public static func bundleID(name: String) -> String {
-    "\(ProjectConfiguration.bundleID).\(ProjectConfiguration.appName).\(name)"
-  }
-
-  static func makeAppTarget(
-    name: String,
-    productName: String? = nil,
-    platform: Platform,
-    dependencies: [TargetDependency] = []
-  ) -> Target {
-    Target(
-      name: "\(name)App",
-      platform: platform,
-      product: .app,
-      productName: productName,
-      bundleId: bundleID(name: name),
-      infoPlist: "\(name)App/Config/Info.plist",
-      sources: ["\(name)App/Sources/**"],
-      resources: ["\(name)App/Resources/**"],
-      dependencies: dependencies
-    )
-  }
-
-  static func makeTestTarget(
+  // TODO: Allow multiple platforms
+  public static func foundationModule(
     name: String,
     platform: Platform,
     dependencies: [TargetDependency] = []
-  ) -> Target {
-    Target(
-      name: "\(name)Tests",
-      platform: platform,
-      product: .unitTests,
-      bundleId: bundleID(name: "\(name)Tests"),
-      infoPlist: "\(name)Tests/Config/Info.plist",
-      sources: ["\(name)Tests/Tests/**"],
-      dependencies: dependencies
+  ) -> Project {
+    Project(
+      name: name,
+      targets: [
+        .makeFrameworkTarget(
+          name: name,
+          platform: platform,
+          dependencies: dependencies
+        ),
+        .makeTestTarget(
+          name: name,
+          platform: platform,
+          dependencies: [
+            .target(name: name)
+          ]
+        )
+      ]
     )
   }
 }
+
