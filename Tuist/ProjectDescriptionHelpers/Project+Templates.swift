@@ -1,10 +1,22 @@
 import ProjectDescription
 
 extension Project {
-  // TODO: Derive app name from platform
   public static func app(
     name: String,
     platform: Platform,
+    dependencies: [TargetDependency] = []
+  ) -> Project {
+    app(
+      name: name,
+      platforms: [platform],
+      dependencies: dependencies
+    )
+  }
+
+  // TODO: Derive app name from platform
+  public static func app(
+    name: String,
+    platforms: [Platform],
     dependencies: [TargetDependency] = []
   ) -> Project {
     Project(
@@ -13,12 +25,12 @@ extension Project {
         .makeAppTarget(
           name: "iOS",
           productName: name,
-          platform: platform,
+          platforms: platforms,
           dependencies: dependencies
         ),
         .makeTestTarget(
           name: "iOSApp",
-          platform: platform,
+          platforms: platforms,
           dependencies: [
             .target(name: "iOSApp")
           ]
@@ -27,10 +39,21 @@ extension Project {
     )
   }
 
-  // TODO: Allow multiple platforms
   public static func foundationModule(
     name: String,
     platform: Platform,
+    dependencies: [TargetDependency] = []
+  ) -> Project {
+    foundationModule(
+      name: name,
+      platforms: [platform],
+      dependencies: dependencies
+    )
+  }
+
+  public static func foundationModule(
+    name: String,
+    platforms: [Platform],
     dependencies: [TargetDependency] = []
   ) -> Project {
     Project(
@@ -38,12 +61,12 @@ extension Project {
       targets: [
         .makeFrameworkTarget(
           name: name,
-          platform: platform,
+          platforms: platforms,
           dependencies: dependencies
         ),
         .makeTestTarget(
           name: name,
-          platform: platform,
+          platforms: platforms,
           dependencies: [
             .target(name: name)
           ]
