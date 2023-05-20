@@ -1,53 +1,70 @@
 import ProjectDescription
 
 extension Project {
-    public static func bundleID(name: String) -> String {
-      "\(ProjectConfiguration.bundleID).\(ProjectConfiguration.appName.lowercased())"
-    }
-
-    public static func app(name: String, platform: Platform, dependencies: [TargetDependency] = []) -> Project {
-        project(name: name, product: .app, platform: platform, dependencies: dependencies, infoPlist: [
-            "CFBundleShortVersionString": "0.1.0",
-            "CFBundleVersion": "1",
-        ])
-    }
-
-    public static func framework(name: String, platform: Platform, dependencies: [TargetDependency] = []) -> Project {
-        project(name: name, product: .framework, platform: platform, dependencies: dependencies)
-    }
-
-    public static func project(
-        name: String,
-        product: Product,
-        platform: Platform,
-        dependencies: [TargetDependency] = [],
-        infoPlist: [String: InfoPlist.Value] = [:]
-    ) -> Project {
-        Project(
-            name: name,
-            targets: [
-                Target(
-                    name: name,
-                    platform: platform,
-                    product: product,
-                    bundleId: bundleID(name: name),
-                    infoPlist: .extendingDefault(with: infoPlist),
-                    sources: ["Sources/**"],
-                    resources: [],
-                    dependencies: dependencies
-                ),
-                Target(
-                    name: "\(name)Tests",
-                    platform: platform,
-                    product: .unitTests,
-                    bundleId: bundleID(name: "\(name)Tests"),
-                    infoPlist: .default,
-                    sources: "Tests/**",
-                    dependencies: [
-                        .target(name: "\(name)"),
-                    ]
-                ),
-            ]
+  // TODO: Allow multiple platforms
+  public static func app(
+    name: String,
+    platform: Platform,
+    dependencies: [TargetDependency] = []
+  ) -> Project {
+    Project(
+      name: name,
+      targets: [
+        .makeAppTarget(
+          name: "iOS",
+          productName: name,
+          platform: platform,
+          dependencies: dependencies
+        ),
+        .makeTestTarget(
+          name: "iOSApp",
+          platform: platform,
+          dependencies: [
+            .target(name: "iOSApp")
+          ]
         )
-    }
+      ]
+    )
+  }
+}
+
+extension Target {
+  public static func bundleID(name: String) -> String {
+    "\(ProjectConfiguration.bundleID).\(ProjectConfiguration.appName).\(name)"
+  }
+
+  static func makeAppTarget(
+    name: String,
+    productName: String? = nil,
+    platform: Platform,
+    dependencies: [TargetDependency] = []
+  ) -> Target {
+    Target(
+      name: "\(name)App",
+      platform: platform,
+      product: .app,
+      productName: productName,
+      bundleId: bundleID(name: name),
+      infoPlist: "\(name)App/Config/Info.plist",
+      sources: ["\(name)App/Sources/**"],
+      resources: ["\(name)App/Resources/**"],
+      dependencies: dependencies
+    )
+  }
+
+  static func makeTestTarget(
+    name: String,
+    platform: Platform,
+    dependencies: [TargetDependency] = []
+  ) -> Target {
+    Target(
+      name: "\(name)Tests",
+      platform: platform,
+      product: .unitTests,
+      bundleId: bundleID(name: "\(name)Tests"),
+      infoPlist: "\(name)Tests/Config/Info.plist",
+      sources: ["\(name)Tests/Tests/**"],
+      dependencies: dependencies
+    )
+  }
 }
