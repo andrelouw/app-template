@@ -21,7 +21,7 @@ let platformsAttribute: Template.Attribute = .optional("platforms", default: "ma
 
 
 func modulePath(_ path: String) -> String {
-  "Modules/\(nameAttribute)/\(path)"
+  "Modules/Foundation/\(nameAttribute)/\(path)"
 }
 
 let template = Template(
