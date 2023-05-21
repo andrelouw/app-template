@@ -1,0 +1,11 @@
+import {{ name }}
+import XCTest
+
+final class {{ name }}CoordinatorTests: XCTestCase {
+  func test_coordinatorInit() {
+    _ = {{ name }}Coordinator(
+      appName: "{{ name }}App",
+      navigationController: UINavigationController()
+    )
+  }
+}

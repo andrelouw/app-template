@@ -1,0 +1,20 @@
+import Core
+import UIKit
+
+public final class {{ name }}Coordinator: Coordinator {
+  private let navigationController: UINavigationController
+  private let appName: String
+
+  public init(
+    appName: String,
+    navigationController: UINavigationController
+  ) {
+    self.appName = appName
+    self.navigationController = navigationController
+  }
+
+  public func start() {
+    let mainViewController = {{ name }}ViewController(appName: appName)
+    navigationController.viewControllers = [mainViewController]
+  }
+}

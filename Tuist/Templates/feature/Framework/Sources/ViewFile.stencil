@@ -1,0 +1,27 @@
+import SwiftUI
+
+public struct {{ name }}View: View {
+  var appName: String
+
+  public var body: some View {
+    ZStack {
+      {{ name }}Asset.brandPrimary.swiftUIColor
+        .ignoresSafeArea()
+      VStack {
+        Text({{ name }}Strings.welcomeMessage)
+          .font(.headline)
+          .foregroundColor({{ name }}Asset.fontSecondary.swiftUIColor)
+        Text(appName)
+          .font(.largeTitle)
+          .foregroundColor({{ name }}Asset.fontPrimary.swiftUIColor)
+      }
+      .offset(y: -100)
+    }
+  }
+}
+
+struct {{ name }}View_Previews: PreviewProvider {
+    static var previews: some View {
+        {{ name }}View(appName: "MyApp")
+    }
+}
