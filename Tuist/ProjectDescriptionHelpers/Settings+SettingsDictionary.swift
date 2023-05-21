@@ -7,7 +7,7 @@ extension Settings {
 }
 
 extension SettingsDictionary {
-  // TODO: Add local signing for mac apps
+  // TODO: [2] Add local signing for mac apps
   public static func base(for platforms: [Platform]) -> Self {
     .init()
     .supportedPlatforms(platforms)

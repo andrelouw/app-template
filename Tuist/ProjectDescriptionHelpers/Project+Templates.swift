@@ -13,7 +13,7 @@ extension Project {
     )
   }
 
-  // TODO: Derive app name from platform
+  // TODO: [3] Derive app name from platform
   public static func app(
     name: String,
     platforms: [Platform],
