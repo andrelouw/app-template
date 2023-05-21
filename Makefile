@@ -1,3 +1,5 @@
+.PHONY: bootstrap run
+
 bootstrap:
 	@./Scripts/tuist.sh
 	@./Scripts/rename.sh
