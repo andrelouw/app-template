@@ -33,5 +33,5 @@ jobs:
       - name: Build Project
         uses: tuist/tuist-action@0.13.0
         with:
-          command: 'build'
-          arguments: ''
+          command: 'test'
+          arguments: '-c'
