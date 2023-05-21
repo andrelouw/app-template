@@ -3,6 +3,9 @@ import XCTest
 
 final class WelcomeTests: XCTestCase {
   func test_init() {
-    _ = WelcomeCoordinator(navigationController: UINavigationController())
+    _ = WelcomeCoordinator(
+      appName: "WelcomeApp",
+      navigationController: UINavigationController()
+    )
   }
 }

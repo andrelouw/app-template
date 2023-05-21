@@ -16,7 +16,7 @@ extension Target {
       platform: platforms.primary,
       product: .app,
       productName: productName,
-      bundleId: bundleID(name: name),
+      bundleId: bundleID(name: "\(name)App"),
       infoPlist: "\(name)App/Config/Info.plist",
       sources: ["\(name)App/Sources/**"],
       resources: ["\(name)App/Resources/**"],

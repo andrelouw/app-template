@@ -107,6 +107,14 @@ extension Project {
           dependencies: [
             .target(name: name)
           ]
+        ),
+         .makeAppTarget(
+          name: name,
+          productName: "\(name)App",
+          platforms: platforms,
+          dependencies: [
+            .target(name: name)
+          ]
         )
       ]
     )
