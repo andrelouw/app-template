@@ -5,3 +5,12 @@ bootstrap:
 
 build: 
 	@tuist build
+
+test:
+	@tuist test
+
+run: 
+	@tuist run iOSApp
+
+module:
+	@./Scripts/module.sh
