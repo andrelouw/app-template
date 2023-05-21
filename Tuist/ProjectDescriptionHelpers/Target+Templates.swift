@@ -45,6 +45,7 @@ extension Target {
   static func makeFrameworkTarget(
     name: String,
     platforms: [Platform],
+    hasResources: Bool = false,
     dependencies: [TargetDependency] = []
   ) -> Target {
     Target(
@@ -54,6 +55,7 @@ extension Target {
       bundleId: bundleID(name: "\(name)"),
       infoPlist: "\(name)/Config/Info.plist",
       sources: ["\(name)/Sources/**"],
+      resources: hasResources ? ["\(name)/Resources/**"] : [],
       dependencies: dependencies,
       settings: .base(for: platforms)
     )

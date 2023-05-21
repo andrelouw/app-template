@@ -1,9 +1,9 @@
 import UIKit
 import SwiftUI
 
-final class MainViewController: UIHostingController<MainView> {
-  init() {
-    super.init(rootView: MainView())
+public final class WelcomeViewController: UIHostingController<WelcomeView> {
+  public init(appName: String) {
+    super.init(rootView: WelcomeView(appName: appName))
   }
 
   @available(*, unavailable)

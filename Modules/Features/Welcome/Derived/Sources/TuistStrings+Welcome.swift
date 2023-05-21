@@ -11,16 +11,18 @@ import Foundation
 
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
-public enum MyAppStrings {
+public enum WelcomeStrings {
+  /// Welcome to
+  public static let welcomeMessage = WelcomeStrings.tr("App", "Welcome_message")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name
 
 // MARK: - Implementation Details
 
-extension MyAppStrings {
+extension WelcomeStrings {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
-    let format = MyAppResources.bundle.localizedString(forKey: key, value: nil, table: table)
+    let format = WelcomeResources.bundle.localizedString(forKey: key, value: nil, table: table)
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }

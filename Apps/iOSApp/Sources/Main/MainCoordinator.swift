@@ -1,16 +1,22 @@
 import Core
 import UIKit
+import Welcome
 
-final class MainCoordinator: Coordinator {
+public final class MainCoordinator: Coordinator {
   private var navigationController: UINavigationController
+  private var childCoordinators = [Coordinator]()
 
-  init(appWindow: UIWindow) {
+  public init(appWindow: UIWindow) {
     navigationController = UINavigationController()
     appWindow.rootViewController = navigationController
   }
 
-  func start() {
-    let mainViewController = MainViewController()
-    navigationController.viewControllers = [mainViewController]
+  public func start() {
+    let welcomeCoordinator = WelcomeCoordinator(
+      navigationController: navigationController
+    )
+
+    welcomeCoordinator.start()
+    childCoordinators = [welcomeCoordinator]
   }
 }

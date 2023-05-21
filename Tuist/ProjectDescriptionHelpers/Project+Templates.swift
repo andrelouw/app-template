@@ -74,5 +74,42 @@ extension Project {
       ]
     )
   }
+
+  public static func featureModule(
+    name: String,
+    platform: Platform,
+    dependencies: [TargetDependency] = []
+  ) -> Project { 
+     featureModule(
+      name: name,
+      platforms: [platform],
+      dependencies: dependencies
+    )
+  }
+
+  public static func featureModule(
+    name: String,
+    platforms: [Platform],
+    dependencies: [TargetDependency] = []
+  ) -> Project {
+    Project(
+      name: name,
+      targets: [
+        .makeFrameworkTarget(
+          name: name,
+          platforms: platforms,
+          hasResources: true,
+          dependencies: dependencies
+        ),
+        .makeTestTarget(
+          name: name,
+          platforms: platforms,
+          dependencies: [
+            .target(name: name)
+          ]
+        )
+      ]
+    )
+  }
 }
 
