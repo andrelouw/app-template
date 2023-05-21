@@ -1,0 +1,8 @@
+import {{ name }}
+import XCTest
+
+final class {{ name }}Tests: XCTestCase {
+  func test_init() {
+    let networking = Networking()
+  }
+}

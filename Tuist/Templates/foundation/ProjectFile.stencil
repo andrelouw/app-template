@@ -1,0 +1,18 @@
+import ProjectDescription
+import ProjectDescriptionHelpers
+
+{# -- Map platforms argument into an array -- #}
+{% set platformArray platforms|split:"," %}
+{# -- Map over platforms and make them enum cases -- #}
+{% map platformArray into caseArray %}.{{ maploop.item }}{% endmap %}
+{# -- Make array a string separated by `+` -- #}
+{% set caseString caseArray|join:"+" %}
+{# -- Remove all new lines and spaces -- #}
+{% set cleanCaseString caseString|removeNewlines:leading %}
+{# -- Replace `+` separator with `, ` to make sure array is correctly formatted -- #}
+{% set caseArrayString cleanCaseString|replace:"+",", " %}
+
+let project = Project.foundationModule(
+  name: "{{ name }}",
+  platforms: [{{ caseArrayString }}]
+)
