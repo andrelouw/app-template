@@ -21,6 +21,9 @@ extension Project {
   ) -> Project {
     Project(
       name: name,
+      options: .options(
+        automaticSchemesOptions: .disabled
+      ),
       targets: [
         .makeAppTarget(
           name: "iOS",
@@ -35,7 +38,8 @@ extension Project {
             .target(name: "iOSApp")
           ]
         )
-      ]
+      ],
+      fileHeaderTemplate: .string("")
     )
   }
 
@@ -60,6 +64,9 @@ extension Project {
   ) -> Project {
     Project(
       name: name,
+      options: .options(
+        automaticSchemesOptions: .disabled
+      ),
       targets: [
         .makeFrameworkTarget(
           name: name,
@@ -97,6 +104,9 @@ extension Project {
   ) -> Project {
     Project(
       name: name,
+      options: .options(
+        automaticSchemesOptions: .disabled
+      ),
       targets: [
         .makeFrameworkTarget(
           name: name,
