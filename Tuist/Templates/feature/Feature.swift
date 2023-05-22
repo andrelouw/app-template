@@ -20,7 +20,7 @@ let nameAttribute: Template.Attribute = .required("name")
 let platformsAttribute: Template.Attribute = .optional("platforms", default: "iOS")
 
 func modulePath(_ path: String) -> String {
-  "Modules/Features/\(nameAttribute)/\(path)"
+  "\(nameAttribute)/\(path)"
 }
 
 let template = Template(

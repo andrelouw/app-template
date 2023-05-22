@@ -14,5 +14,8 @@ import ProjectDescriptionHelpers
 
 let project = Project.foundationModule(
   name: "{{ name }}",
-  platforms: [{{ caseArrayString }}]
+  platforms: [{{ caseArrayString }}],
+   dependencies: [
+    .foundation("Core")
+  ]
 )

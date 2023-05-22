@@ -5,6 +5,7 @@ MODULE_TYPES=(Foundation Feature)
 PLATFORMS=(iOS macOS tvOS)
 SELECTED_PLATFORMS=()
 SELECTED_MODULE_TYPE=""
+MODULE_PATH="Modules/"
 
 select_module_type() {
     echo ""
@@ -38,26 +39,23 @@ create_module() {
     # Create the module command name by lower casing the selected module
     module_command=`echo "$SELECTED_MODULE_TYPE" | awk '{print tolower($0)}'`
 
-    echo ""
-    echo "📦 Creating ${SELECTED_MODULE_TYPE} module ${MODULE_NAME} for platforms ${platforms} ..."
+    if [ "$SELECTED_MODULE_TYPE" = "Feature" ]; then
+        MODULE_PATH+="Features"
+    elif [ "$SELECTED_MODULE_TYPE" = "Foundation" ]; then
+        MODULE_PATH+="Foundation"
+    fi
 
-    tuist scaffold $module_command --name $MODULE_NAME --platforms $platforms
+    echo ""
+    echo "📦 Creating ${SELECTED_MODULE_TYPE} module ${MODULE_NAME} for platforms ${platforms} at path ${MODULE_PATH} ..."
+
+    tuist scaffold $module_command --name $MODULE_NAME --platforms $platforms -p $MODULE_PATH
 }
 
 generate_and_open() {
     echo ""
     echo "📦 Generating and opening the module..."
 
-    module_path=""
-
-    if [ "$SELECTED_MODULE_TYPE" = "Feature" ]; then
-        module_path="Features"
-    else
-        module_path=$SELECTED_MODULE_TYPE
-    fi
-
-
-    tuist generate -p Modules/$module_path/$MODULE_NAME
+    tuist generate -p $MODULE_PATH/$MODULE_NAME
 }
 
 echo "📦 Follow the instructions to create a new module"

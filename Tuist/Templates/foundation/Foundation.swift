@@ -19,9 +19,8 @@ import ProjectDescription
 let nameAttribute: Template.Attribute = .required("name")
 let platformsAttribute: Template.Attribute = .optional("platforms", default: "macOS")
 
-
 func modulePath(_ path: String) -> String {
-  "Modules/Foundation/\(nameAttribute)/\(path)"
+  "\(nameAttribute)/\(path)"
 }
 
 let template = Template(
