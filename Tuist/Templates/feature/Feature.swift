@@ -49,7 +49,7 @@ let template = Template(
       ),
       .file(
         path: modulePath("\(nameAttribute)/Resources/en.lproj/\(nameAttribute).strings"),
-        templatePath: "Framework/Resources/Strings.strings"
+        templatePath: "Framework/Resources/Feature.strings"
       ),
       .directory(
         path: modulePath("\(nameAttribute)/Resources"),

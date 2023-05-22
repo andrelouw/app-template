@@ -1,3 +1,4 @@
+import UI
 import SwiftUI
 
 public struct {{ name }}View: View {
@@ -5,15 +6,15 @@ public struct {{ name }}View: View {
 
   public var body: some View {
     ZStack {
-      {{ name }}Asset.brandPrimary.swiftUIColor
+      Color.brand.secondary
         .ignoresSafeArea()
       VStack {
         Text({{ name }}Strings.welcomeMessage)
           .font(.headline)
-          .foregroundColor({{ name }}Asset.fontSecondary.swiftUIColor)
+          .foregroundColor(.font.primary)
         Text(appName)
           .font(.largeTitle)
-          .foregroundColor({{ name }}Asset.fontPrimary.swiftUIColor)
+          .foregroundColor(.font.secondary)
       }
       .offset(y: -100)
     }
