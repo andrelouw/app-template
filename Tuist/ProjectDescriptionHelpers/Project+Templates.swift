@@ -42,6 +42,7 @@ extension Project {
   public static func foundationModule(
     name: String,
     platform: Platform,
+    hasResources: Bool = false,
     dependencies: [TargetDependency] = []
   ) -> Project {
     foundationModule(
@@ -54,6 +55,7 @@ extension Project {
   public static func foundationModule(
     name: String,
     platforms: [Platform],
+    hasResources: Bool = false,
     dependencies: [TargetDependency] = []
   ) -> Project {
     Project(
@@ -62,6 +64,7 @@ extension Project {
         .makeFrameworkTarget(
           name: name,
           platforms: platforms,
+          hasResources: hasResources,
           dependencies: dependencies
         ),
         .makeTestTarget(

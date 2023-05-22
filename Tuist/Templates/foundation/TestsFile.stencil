@@ -3,6 +3,6 @@ import XCTest
 
 final class {{ name }}Tests: XCTestCase {
   func test_init() {
-    _ = Networking()
+    _ = {{ name }}()
   }
 }
