@@ -21,6 +21,7 @@
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 public enum WelcomeAppAsset {
   public static let accentColor = WelcomeAppColors(name: "AccentColor")
+  public static let app = WelcomeAppImages(name: "app")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
@@ -85,6 +86,73 @@ public extension SwiftUI.Color {
   init(asset: WelcomeAppColors) {
     let bundle = WelcomeAppResources.bundle
     self.init(asset.name, bundle: bundle)
+  }
+}
+#endif
+
+public struct WelcomeAppImages {
+  public fileprivate(set) var name: String
+
+  #if os(macOS)
+  public typealias Image = NSImage
+  #elseif os(iOS) || os(tvOS) || os(watchOS)
+  public typealias Image = UIImage
+  #endif
+
+  public var image: Image {
+    let bundle = WelcomeAppResources.bundle
+    #if os(iOS) || os(tvOS)
+    let image = Image(named: name, in: bundle, compatibleWith: nil)
+    #elseif os(macOS)
+    let image = bundle.image(forResource: NSImage.Name(name))
+    #elseif os(watchOS)
+    let image = Image(named: name)
+    #endif
+    guard let result = image else {
+      fatalError("Unable to load image asset named \(name).")
+    }
+    return result
+  }
+
+  #if canImport(SwiftUI)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  public var swiftUIImage: SwiftUI.Image {
+    SwiftUI.Image(asset: self)
+  }
+  #endif
+}
+
+public extension WelcomeAppImages.Image {
+  @available(macOS, deprecated,
+    message: "This initializer is unsafe on macOS, please use the WelcomeAppImages.image property")
+  convenience init?(asset: WelcomeAppImages) {
+    #if os(iOS) || os(tvOS)
+    let bundle = WelcomeAppResources.bundle
+    self.init(named: asset.name, in: bundle, compatibleWith: nil)
+    #elseif os(macOS)
+    self.init(named: NSImage.Name(asset.name))
+    #elseif os(watchOS)
+    self.init(named: asset.name)
+    #endif
+  }
+}
+
+#if canImport(SwiftUI)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+public extension SwiftUI.Image {
+  init(asset: WelcomeAppImages) {
+    let bundle = WelcomeAppResources.bundle
+    self.init(asset.name, bundle: bundle)
+  }
+
+  init(asset: WelcomeAppImages, label: Text) {
+    let bundle = WelcomeAppResources.bundle
+    self.init(asset.name, bundle: bundle, label: label)
+  }
+
+  init(decorative asset: WelcomeAppImages) {
+    let bundle = WelcomeAppResources.bundle
+    self.init(decorative: asset.name, bundle: bundle)
   }
 }
 #endif

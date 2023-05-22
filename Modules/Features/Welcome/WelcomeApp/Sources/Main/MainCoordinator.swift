@@ -13,7 +13,7 @@ public final class MainCoordinator: Coordinator {
 
   public func start() {
     let welcomeCoordinator = WelcomeCoordinator(
-      appName: Bundle.main.displayName ?? "App",
+      appName: Bundle.main.displayName ?? "Example App",
       navigationController: navigationController
     )
 

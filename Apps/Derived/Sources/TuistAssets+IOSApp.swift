@@ -21,6 +21,7 @@
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 public enum MyAppAsset {
   public static let accentColor = MyAppColors(name: "AccentColor")
+  public static let app = MyAppImages(name: "app")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
@@ -85,6 +86,73 @@ public extension SwiftUI.Color {
   init(asset: MyAppColors) {
     let bundle = MyAppResources.bundle
     self.init(asset.name, bundle: bundle)
+  }
+}
+#endif
+
+public struct MyAppImages {
+  public fileprivate(set) var name: String
+
+  #if os(macOS)
+  public typealias Image = NSImage
+  #elseif os(iOS) || os(tvOS) || os(watchOS)
+  public typealias Image = UIImage
+  #endif
+
+  public var image: Image {
+    let bundle = MyAppResources.bundle
+    #if os(iOS) || os(tvOS)
+    let image = Image(named: name, in: bundle, compatibleWith: nil)
+    #elseif os(macOS)
+    let image = bundle.image(forResource: NSImage.Name(name))
+    #elseif os(watchOS)
+    let image = Image(named: name)
+    #endif
+    guard let result = image else {
+      fatalError("Unable to load image asset named \(name).")
+    }
+    return result
+  }
+
+  #if canImport(SwiftUI)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  public var swiftUIImage: SwiftUI.Image {
+    SwiftUI.Image(asset: self)
+  }
+  #endif
+}
+
+public extension MyAppImages.Image {
+  @available(macOS, deprecated,
+    message: "This initializer is unsafe on macOS, please use the MyAppImages.image property")
+  convenience init?(asset: MyAppImages) {
+    #if os(iOS) || os(tvOS)
+    let bundle = MyAppResources.bundle
+    self.init(named: asset.name, in: bundle, compatibleWith: nil)
+    #elseif os(macOS)
+    self.init(named: NSImage.Name(asset.name))
+    #elseif os(watchOS)
+    self.init(named: asset.name)
+    #endif
+  }
+}
+
+#if canImport(SwiftUI)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+public extension SwiftUI.Image {
+  init(asset: MyAppImages) {
+    let bundle = MyAppResources.bundle
+    self.init(asset.name, bundle: bundle)
+  }
+
+  init(asset: MyAppImages, label: Text) {
+    let bundle = MyAppResources.bundle
+    self.init(asset.name, bundle: bundle, label: label)
+  }
+
+  init(decorative asset: MyAppImages) {
+    let bundle = MyAppResources.bundle
+    self.init(decorative: asset.name, bundle: bundle)
   }
 }
 #endif

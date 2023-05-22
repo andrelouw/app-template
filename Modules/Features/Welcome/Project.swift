@@ -5,6 +5,7 @@ let project = Project.featureModule(
   name: "Welcome",
   platforms: [.iOS],
    dependencies: [
-    .foundation("Core")
+    .foundation("Core"),
+    .foundation("UI")
   ]
 )
