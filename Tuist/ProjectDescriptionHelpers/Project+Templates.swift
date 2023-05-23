@@ -1,7 +1,6 @@
 import ProjectDescription
 
 extension Project {
-  // TODO: [3] Derive app name from platform
   public static func app(
     name: String,
     platform: Platform,
