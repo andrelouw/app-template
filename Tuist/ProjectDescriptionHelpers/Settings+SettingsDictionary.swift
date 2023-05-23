@@ -1,20 +1,25 @@
 import ProjectDescription
 
 extension Settings {
-  public static func base(for platforms: [Platform]) -> Self {
-    .settings(base: .base(for: platforms))
+  public static func base(
+    platformSet: PlatformSet
+  ) -> Self {
+    .settings(base: .base(platformSet: platformSet))
   }
 }
 
 extension SettingsDictionary {
-  public static func base(for platforms: [Platform]) -> Self {
+  public static func base(
+    platformSet: PlatformSet
+  ) -> Self {
     .init()
-    .supportedPlatforms(platforms)
-    .deploymentTargets(platforms)
-    .codeSigning(platforms)
+    .supportedPlatforms(platformSet.supportedPlatforms)
+    .deploymentTargets(platformSet.supportedPlatforms)
+    .codeSigning(platformSet.supportedPlatforms)
+    .sdkRoot(platform: platformSet.base)
   }
 
-  private func supportedPlatforms(_ platforms: [Platform]) -> SettingsDictionary {
+  private func supportedPlatforms(_ platforms: Set<Platform>) -> SettingsDictionary {
     var supportedPlatforms = [String]()
 
     if platforms.contains(.iOS) {
@@ -32,7 +37,7 @@ extension SettingsDictionary {
     return merging(["SUPPORTED_PLATFORMS": SettingValue(stringLiteral: supportedPlatforms.joined(separator: " "))])
   }
 
-  func deploymentTargets(_ platforms: [Platform]) -> SettingsDictionary {
+  func deploymentTargets(_ platforms: Set<Platform>) -> SettingsDictionary {
     var supportedPlatforms = [String: SettingValue]()
 
     if platforms.contains(.iOS) {
@@ -46,7 +51,26 @@ extension SettingsDictionary {
     return merging(supportedPlatforms)
   }
 
-  func codeSigning(_ platforms: [Platform]) -> SettingsDictionary {
+  func sdkRoot(platform: Platform) -> SettingsDictionary {
+    var sdk = [String: SettingValue]()
+
+    switch platform {
+    case .iOS:
+      sdk["SDKROOT"] = "iphoneos"
+    case .macOS:
+      sdk["SDKROOT"] = "macosx"
+    case .tvOS:
+      sdk["SDKROOT"] = "appletvos"
+    case .watchOS:
+      sdk["SDKROOT"] = "watchos"
+    @unknown default:
+      return self
+    }
+
+    return merging(sdk)
+  }
+
+  func codeSigning(_ platforms: Set<Platform>) -> SettingsDictionary {
     var codeSigning = [String: SettingValue]()
 
     if platforms.contains(.macOS) {

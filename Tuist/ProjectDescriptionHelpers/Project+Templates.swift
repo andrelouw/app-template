@@ -1,22 +1,10 @@
 import ProjectDescription
 
 extension Project {
-  public static func app(
-    name: String,
-    platform: Platform,
-    dependencies: [TargetDependency] = []
-  ) -> Project {
-    app(
-      name: name,
-      platforms: [platform],
-      dependencies: dependencies
-    )
-  }
-
   // TODO: [3] Derive app name from platform
   public static func app(
     name: String,
-    platforms: [Platform],
+    platform: Platform,
     dependencies: [TargetDependency] = []
   ) -> Project {
     Project(
@@ -28,12 +16,12 @@ extension Project {
         .makeAppTarget(
           name: name,
           productName: name,
-          platforms: platforms,
+          platform: platform,
           dependencies: dependencies
         ),
         .makeTestTarget(
           name: "\(name)App",
-          platforms: platforms,
+          platform: platform.asPlatformSet(),
           dependencies: [
             .target(name: "\(name)App")
           ]
@@ -45,20 +33,21 @@ extension Project {
 
   public static func foundationModule(
     name: String,
-    platform: Platform,
+    platforms: [Platform],
     hasResources: Bool = false,
     dependencies: [TargetDependency] = []
   ) -> Project {
     foundationModule(
       name: name,
-      platforms: [platform],
+      platform: platforms.asPlatformSet(),
+      hasResources: hasResources,
       dependencies: dependencies
     )
   }
 
   public static func foundationModule(
     name: String,
-    platforms: [Platform],
+    platform: PlatformSet,
     hasResources: Bool = false,
     dependencies: [TargetDependency] = []
   ) -> Project {
@@ -70,13 +59,13 @@ extension Project {
       targets: [
         .makeFrameworkTarget(
           name: name,
-          platforms: platforms,
+          platform: platform,
           hasResources: hasResources,
           dependencies: dependencies
         ),
         .makeTestTarget(
           name: name,
-          platforms: platforms,
+          platform: platform,
           dependencies: [
             .target(name: name)
           ]
@@ -87,22 +76,27 @@ extension Project {
 
   public static func featureModule(
     name: String,
-    platform: Platform,
+    platforms: [Platform],
+    exampleAppPlatform: Platform? = nil,
     dependencies: [TargetDependency] = []
-  ) -> Project { 
-     featureModule(
+  ) -> Project {
+    featureModule(
       name: name,
-      platforms: [platform],
+      platform: platforms.asPlatformSet(),
+      exampleAppPlatform: exampleAppPlatform,
       dependencies: dependencies
     )
   }
 
   public static func featureModule(
     name: String,
-    platforms: [Platform],
+    platform: PlatformSet,
+    exampleAppPlatform: Platform? = nil,
     dependencies: [TargetDependency] = []
   ) -> Project {
-    Project(
+    let appPlatform = exampleAppPlatform ?? platform.base
+
+    return Project(
       name: name,
       options: .options(
         automaticSchemesOptions: .disabled
@@ -110,13 +104,13 @@ extension Project {
       targets: [
         .makeFrameworkTarget(
           name: name,
-          platforms: platforms,
+          platform: platform,
           hasResources: true,
           dependencies: dependencies
         ),
         .makeTestTarget(
           name: name,
-          platforms: platforms,
+          platform: platform,
           dependencies: [
             .target(name: name)
           ]
@@ -124,7 +118,7 @@ extension Project {
          .makeAppTarget(
           name: name,
           productName: "\(name)App",
-          platforms: platforms,
+          platform: appPlatform,
           dependencies: [
             .target(name: name)
           ]

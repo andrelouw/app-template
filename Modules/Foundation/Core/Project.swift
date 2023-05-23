@@ -3,5 +3,5 @@ import ProjectDescriptionHelpers
 
 let project = Project.foundationModule(
   name: "Core",
-  platforms: [.iOS, .macOS] // iOS needs to be first to prevent tuist errors, since tuist does not support multi platform yet
+  platform: .iOS.with(supportedPlatforms: .macOS) // Main app platform needs to be base for now while tuist does not support multiplatform. After that we can pick and choose as we like
 )
