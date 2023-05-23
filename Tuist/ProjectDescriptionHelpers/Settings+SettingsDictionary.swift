@@ -7,11 +7,11 @@ extension Settings {
 }
 
 extension SettingsDictionary {
-  // TODO: [2] Add local signing for mac apps
   public static func base(for platforms: [Platform]) -> Self {
     .init()
     .supportedPlatforms(platforms)
     .deploymentTargets(platforms)
+    .codeSigning(platforms)
   }
 
   private func supportedPlatforms(_ platforms: [Platform]) -> SettingsDictionary {
@@ -44,5 +44,15 @@ extension SettingsDictionary {
     }
 
     return merging(supportedPlatforms)
+  }
+
+  func codeSigning(_ platforms: [Platform]) -> SettingsDictionary {
+    var codeSigning = [String: SettingValue]()
+
+    if platforms.contains(.macOS) {
+      codeSigning["CODE_SIGN_IDENTITY[sdk=macosx*]"] = SettingValue("-")
+    }
+
+    return merging(codeSigning)
   }
 }
