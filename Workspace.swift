@@ -45,11 +45,11 @@ extension TargetReference {
   }
 
   static func app(_ name: String) -> TargetReference {
-    TargetReference(projectPath: .app, target: name)
+    TargetReference(projectPath: .app(name), target: "\(name)App")
   }
 
   static func appTest(_ name: String) -> TargetReference {
-    TargetReference(projectPath: .app, target: "\(name)Tests")
+    TargetReference(projectPath: .app(name), target: "\(name)AppTests")
   }
 }
 
@@ -62,8 +62,8 @@ extension Path {
     .relativeToRoot("Modules/Features/\(path)")
   }
 
-  static var app: Path {
-    .relativeToRoot("Apps")
+  static func app(_ path: String) -> Path {
+    .relativeToRoot("Apps/\(path)")
   }
 }
 
@@ -74,7 +74,7 @@ let iosCIScheme = Scheme(
       .foundation("Core"),
       .foundation("UI"),
       .feature("Welcome"),
-      .app("iOSApp")
+      .app("iOS")
     ]
   ),
   testAction: .targets(
@@ -82,7 +82,7 @@ let iosCIScheme = Scheme(
       .foundation("Core"),
       .foundation("UI"),
       .feature("Welcome"),
-      .app("iOSApp")
+      .app("iOS")
     ],
     attachDebugger: false
   )
@@ -110,16 +110,16 @@ let iOS = Scheme(
       .foundation("Core"),
       .foundation("UI"),
       .feature("Welcome"),
-      .app("iOSApp")
+      .app("iOS")
     ]
   ),
-  runAction: .runAction(executable: .app("iOSApp"))
+  runAction: .runAction(executable: .app("iOS"))
 )
 
 let workspace = Workspace(
   name: ProjectConfiguration.appName,
   projects: [
-    "Apps"
+    "Apps/iOS"
   ],
   schemes: [
     macCIScheme,

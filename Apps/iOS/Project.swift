@@ -2,7 +2,7 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.app(
-  name: ProjectConfiguration.appName,
+  name: "iOS",
   platform: .iOS,
   dependencies: [
     .foundation("Core"),

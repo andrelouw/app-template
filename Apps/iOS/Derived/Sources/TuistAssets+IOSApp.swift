@@ -19,15 +19,15 @@
 // MARK: - Asset Catalogs
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
-public enum MyAppAsset {
-  public static let accentColor = MyAppColors(name: "AccentColor")
-  public static let app = MyAppImages(name: "app")
+public enum IOSAsset {
+  public static let accentColor = IOSColors(name: "AccentColor")
+  public static let app = IOSImages(name: "app")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
 // MARK: - Implementation Details
 
-public final class MyAppColors {
+public final class IOSColors {
   public fileprivate(set) var name: String
 
   #if os(macOS)
@@ -66,10 +66,10 @@ public final class MyAppColors {
   }
 }
 
-public extension MyAppColors.Color {
+public extension IOSColors.Color {
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
-  convenience init?(asset: MyAppColors) {
-    let bundle = MyAppResources.bundle
+  convenience init?(asset: IOSColors) {
+    let bundle = IOSResources.bundle
     #if os(iOS) || os(tvOS)
     self.init(named: asset.name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
@@ -83,14 +83,14 @@ public extension MyAppColors.Color {
 #if canImport(SwiftUI)
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
 public extension SwiftUI.Color {
-  init(asset: MyAppColors) {
-    let bundle = MyAppResources.bundle
+  init(asset: IOSColors) {
+    let bundle = IOSResources.bundle
     self.init(asset.name, bundle: bundle)
   }
 }
 #endif
 
-public struct MyAppImages {
+public struct IOSImages {
   public fileprivate(set) var name: String
 
   #if os(macOS)
@@ -100,7 +100,7 @@ public struct MyAppImages {
   #endif
 
   public var image: Image {
-    let bundle = MyAppResources.bundle
+    let bundle = IOSResources.bundle
     #if os(iOS) || os(tvOS)
     let image = Image(named: name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
@@ -122,12 +122,12 @@ public struct MyAppImages {
   #endif
 }
 
-public extension MyAppImages.Image {
+public extension IOSImages.Image {
   @available(macOS, deprecated,
-    message: "This initializer is unsafe on macOS, please use the MyAppImages.image property")
-  convenience init?(asset: MyAppImages) {
+    message: "This initializer is unsafe on macOS, please use the IOSImages.image property")
+  convenience init?(asset: IOSImages) {
     #if os(iOS) || os(tvOS)
-    let bundle = MyAppResources.bundle
+    let bundle = IOSResources.bundle
     self.init(named: asset.name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
     self.init(named: NSImage.Name(asset.name))
@@ -140,18 +140,18 @@ public extension MyAppImages.Image {
 #if canImport(SwiftUI)
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
 public extension SwiftUI.Image {
-  init(asset: MyAppImages) {
-    let bundle = MyAppResources.bundle
+  init(asset: IOSImages) {
+    let bundle = IOSResources.bundle
     self.init(asset.name, bundle: bundle)
   }
 
-  init(asset: MyAppImages, label: Text) {
-    let bundle = MyAppResources.bundle
+  init(asset: IOSImages, label: Text) {
+    let bundle = IOSResources.bundle
     self.init(asset.name, bundle: bundle, label: label)
   }
 
-  init(decorative asset: MyAppImages) {
-    let bundle = MyAppResources.bundle
+  init(decorative asset: IOSImages) {
+    let bundle = IOSResources.bundle
     self.init(decorative: asset.name, bundle: bundle)
   }
 }

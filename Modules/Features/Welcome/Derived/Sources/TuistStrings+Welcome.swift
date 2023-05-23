@@ -12,7 +12,7 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
 public enum WelcomeStrings {
-  /// Welcome to
+  /// Welcome to the
   public static let welcomeMessage = WelcomeStrings.tr("App", "Welcome_message")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

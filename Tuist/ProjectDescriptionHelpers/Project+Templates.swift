@@ -26,16 +26,16 @@ extension Project {
       ),
       targets: [
         .makeAppTarget(
-          name: "iOS",
+          name: name,
           productName: name,
           platforms: platforms,
           dependencies: dependencies
         ),
         .makeTestTarget(
-          name: "iOSApp",
+          name: "\(name)App",
           platforms: platforms,
           dependencies: [
-            .target(name: "iOSApp")
+            .target(name: "\(name)App")
           ]
         )
       ],
