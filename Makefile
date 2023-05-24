@@ -13,6 +13,7 @@ bootstrap:
 	@./Scripts/rename.sh
 	@./Scripts/hooks.sh
 
+.PHONY: tuist
 tuist: 
 	@./Scripts/tuist.sh
 
