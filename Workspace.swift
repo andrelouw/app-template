@@ -69,39 +69,25 @@ extension Path {
 
 let iosCIScheme = Scheme(
   name: "CI-iOS",
-  buildAction: .buildAction(
-    targets: [
-      .foundation("Core"),
-      .foundation("UI"),
-      .feature("Welcome"),
-      .app("iOS")
-    ]
-  ),
-  testAction: .targets(
-    [
-      .foundation("Core"),
-      .foundation("UI"),
-      .feature("Welcome"),
-      .app("iOS")
-    ],
-    attachDebugger: false
-  )
+  testAction:
+      .testPlans(
+        [
+          "CI-iOS.xctestplan"
+        ],
+        attachDebugger: false
+      )
 )
 
 let macCIScheme = Scheme(
   name: "CI-macOS",
-  buildAction: .buildAction(
-    targets: [
-      .foundation("Core"),
-    ]
-  ),
-  testAction: .targets(
-    [
-      .foundation("Core"),
-    ],
-    attachDebugger: false
+  testAction:
+      .testPlans(
+        [
+          "CI-macOS.xctestplan"
+        ],
+        attachDebugger: false
+      )
   )
-)
 
 let iOS = Scheme(
   name: "iOS",

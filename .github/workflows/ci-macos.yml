@@ -1,0 +1,43 @@
+name: CI-macOS
+
+on:
+  push: 
+    branches: 
+      - develop
+  pull_request:
+    branches: [ develop ]
+
+concurrency:
+   group: ci-macos.${{ github.head_ref }}
+   cancel-in-progress: true
+
+jobs: 
+  build:
+    name: CI for macOS
+    runs-on: macos-13
+
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v3
+
+      # Get xcode version from project
+      - name: Determine Xcode Version
+        id: xcode-version
+        shell: bash
+        run: |
+          echo "::set-output name=version::$(cat .xcode-version)"
+
+      # Make sure we use the correct xcode version
+      - name: Select Xcode Version
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ steps.xcode-version.outputs.version }}
+      
+      - name: Install 
+        run: brew install xcbeautify
+
+      - name: CI for macOS
+        run: make ci_macos
+

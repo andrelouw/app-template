@@ -1,0 +1,45 @@
+{
+  "configurations" : [
+    {
+      "id" : "0117F538-BE0B-42A8-BA6C-01FA39498995",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Foundation\/Core\/Core.xcodeproj",
+        "identifier" : "73B1A2AD90A7970B7DB39CDC",
+        "name" : "CoreTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Foundation\/UI\/UI.xcodeproj",
+        "identifier" : "F5B409AA710E5F5513429B5E",
+        "name" : "UITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Features\/Welcome\/Welcome.xcodeproj",
+        "identifier" : "AC03EA852191608C960564B1",
+        "name" : "WelcomeTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Apps\/iOS\/iOS.xcodeproj",
+        "identifier" : "26E6F33D9A2889D035E7E9D6",
+        "name" : "iOSAppTests"
+      }
+    }
+  ],
+  "version" : 1
+}

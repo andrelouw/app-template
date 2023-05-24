@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "0BB8E38A-C037-4D82-96D6-DC6A12FEEC72",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Foundation\/Core\/Core.xcodeproj",
+        "identifier" : "73B1A2AD90A7970B7DB39CDC",
+        "name" : "CoreTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Foundation\/UI\/UI.xcodeproj",
+        "identifier" : "F5B409AA710E5F5513429B5E",
+        "name" : "UITests"
+      }
+    }
+  ],
+  "version" : 1
+}

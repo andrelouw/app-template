@@ -8,12 +8,12 @@ extension Target {
   static func makeAppTarget(
     name: String,
     productName: String? = nil,
-    platforms: [Platform],
+    platform: Platform,
     dependencies: [TargetDependency] = []
   ) -> Target {
     Target(
       name: "\(name)App",
-      platform: platforms.primary,
+      platform: platform,
       product: .app,
       productName: productName,
       bundleId: bundleID(name: "\(name)App"),
@@ -21,43 +21,43 @@ extension Target {
       sources: ["\(name)App/Sources/**"],
       resources: ["\(name)App/Resources/**"],
       dependencies: dependencies,
-      settings: .base(for: platforms)
+      settings: .base(platformSet: platform.asPlatformSet())
     )
   }
 
   static func makeTestTarget(
     name: String,
-    platforms: [Platform],
+    platform: PlatformSet,
     dependencies: [TargetDependency] = []
   ) -> Target {
     Target(
       name: "\(name)Tests",
-      platform: platforms.primary,
+      platform: platform.base,
       product: .unitTests,
       bundleId: bundleID(name: "\(name)Tests"),
       infoPlist: "\(name)Tests/Config/Info.plist",
       sources: ["\(name)Tests/Tests/**"],
       dependencies: dependencies,
-      settings: .base(for: platforms)
+      settings: .base(platformSet: platform)
     )
   }
 
   static func makeFrameworkTarget(
     name: String,
-    platforms: [Platform],
+    platform: PlatformSet,
     hasResources: Bool = false,
     dependencies: [TargetDependency] = []
   ) -> Target {
     Target(
       name: name,
-      platform: platforms.primary,
+      platform: platform.base,
       product: .framework,
       bundleId: bundleID(name: "\(name)"),
       infoPlist: "\(name)/Config/Info.plist",
       sources: ["\(name)/Sources/**"],
       resources: hasResources ? ["\(name)/Resources/**"] : [],
       dependencies: dependencies,
-      settings: .base(for: platforms)
+      settings: .base(platformSet: platform)
     )
   }
 }

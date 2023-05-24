@@ -1,5 +1,5 @@
 #!/bin/bash
 
-tuist test -c
+make test
 
 
