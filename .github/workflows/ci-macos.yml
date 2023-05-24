@@ -8,13 +8,13 @@ on:
     branches: [ develop ]
 
 concurrency:
-   group: ci.${{ github.head_ref }}
+   group: ci-macos.${{ github.head_ref }}
    cancel-in-progress: true
 
 jobs: 
   build:
-    name: Build Workspace
-    runs-on: macos-latest
+    name: CI for macOS
+    runs-on: macos-13
 
     timeout-minutes: 10
 
@@ -34,6 +34,9 @@ jobs:
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: ${{ steps.xcode-version.outputs.version }}
+      
+      - name: Install 
+        run: brew install xcbeautify
 
       - name: CI for macOS
         run: make ci_macos
