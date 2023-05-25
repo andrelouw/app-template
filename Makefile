@@ -2,7 +2,7 @@ app_name := MyApp
 ios_device := iPhone 14
 ios_os := 16.4
 
-.PHONY: tuist bootstrap build run workspace module test_ios test_macos rename
+.PHONY: tuist bootstrap build run workspace module test_ios test_macos rename clean format lint
 
 all: bootstrap rename run 
 ci: tuist workspace build test_macos test_ios
@@ -46,3 +46,9 @@ unbootstrap:
 clean: 
 	@find . -name "*.xcodeproj" -type d -print0 | xargs -0 /bin/rm -r
 	@find . -name "*.xcworkspace" -type d -print0 | xargs -0 /bin/rm -r
+
+format:
+	@./Scripts/format.sh
+
+lint:
+	@./Scripts/lint.sh
