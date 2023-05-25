@@ -6,8 +6,8 @@ if [[ "$(uname -m)" == arm64 ]]; then
 fi
 
 if which mint > /dev/null; then
-  mint run swiftlint lint --fix --format --progress --quiet --config $DIR/../.swiftlint.yml
-#   mint run swiftformat --lint --lenient --config $DIR/../.swiftformat .
+  mint run swiftlint lint --fix --format --progress --config $DIR/../.swiftlint.yml
+  mint run swiftformat --config $DIR/../.swiftformat .
 else
   echo "warning: Mint not installed, formating won't work. Install using `make bootstrap`. "
 fi
