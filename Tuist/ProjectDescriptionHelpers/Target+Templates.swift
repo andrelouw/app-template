@@ -1,5 +1,9 @@
 import ProjectDescription
 
+extension TargetScript {
+  static let linting = TargetScript.post(path: .relativeToRoot("Scripts/lint.sh"), name: "Run linting", basedOnDependencyAnalysis: false)
+}
+
 extension Target {
   static func bundleID(name: String) -> String {
     "\(ProjectConfiguration.bundleID).\(ProjectConfiguration.appName).\(name)"
@@ -20,6 +24,9 @@ extension Target {
       infoPlist: "\(name)App/Config/Info.plist",
       sources: ["\(name)App/Sources/**"],
       resources: ["\(name)App/Resources/**"],
+      scripts: [
+        .linting
+      ],
       dependencies: dependencies,
       settings: .base(platformSet: platform.asPlatformSet())
     )
@@ -37,6 +44,9 @@ extension Target {
       bundleId: bundleID(name: "\(name)Tests"),
       infoPlist: "\(name)Tests/Config/Info.plist",
       sources: ["\(name)Tests/Tests/**"],
+      scripts: [
+        .linting
+      ],
       dependencies: dependencies,
       settings: .base(platformSet: platform)
     )
@@ -56,6 +66,9 @@ extension Target {
       infoPlist: "\(name)/Config/Info.plist",
       sources: ["\(name)/Sources/**"],
       resources: hasResources ? ["\(name)/Resources/**"] : [],
+      scripts: [
+        .linting
+      ],
       dependencies: dependencies,
       settings: .base(platformSet: platform)
     )
