@@ -42,3 +42,7 @@ test_macos:
 
 unbootstrap: 
 	@./Scripts/uninstall.sh
+
+clean: 
+	@find . -name "*.xcodeproj" -type d -print0 | xargs -0 /bin/rm -r
+	@find . -name "*.xcworkspace" -type d -print0 | xargs -0 /bin/rm -r
