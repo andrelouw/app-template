@@ -24,8 +24,3 @@ sedi -E 's/(let bundleID = ")(.*)(")/\1'"$BUNDLE_IDENTIFIER"'\3/g' Tuist/Project
 sedi -E 's/(let appName = ")(.*)(")/\1'"$APP_NAME"'\3/g' Tuist/ProjectDescriptionHelpers/ProjectConfiguration.swift
 
 echo "✅ Bundle identifier and app name successfully replaced."
-
-
-
-
-

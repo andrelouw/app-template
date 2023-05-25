@@ -2,9 +2,9 @@ app_name := MyApp
 ios_device := iPhone 14
 ios_os := 16.4
 
-.PHONY: tuist bootstrap build run workspace module test_ios test_macos
+.PHONY: tuist bootstrap build run workspace module test_ios test_macos rename
 
-all: bootstrap run 
+all: bootstrap rename run 
 ci: tuist workspace build test_macos test_ios
 ci_macos: tuist workspace build test_macos
 ci_ios: tuist workspace build test_ios
@@ -14,22 +14,24 @@ bootstrap:
 	@./Scripts/homebrew.sh
 	@./Scripts/mint.sh
 	@make tuist
-	@./Scripts/rename.sh
 	@./Scripts/hooks.sh
+
+rename:
+	@./Scripts/rename.sh
 
 tuist: 
 	@./Scripts/tuist.sh
 
-build: 
+build: tuist
 	@tuist build --clean
 
-run: 
+run: tuist
 	@tuist generate
 
-workspace:
+workspace: tuist
 	@tuist generate --no-open
 
-module:
+module: tuist
 	@./Scripts/module.sh
 
 test_ios: 
@@ -37,3 +39,6 @@ test_ios:
 
 test_macos:
 	@set -o pipefail && xcodebuild test -workspace ${app_name}.xcworkspace -scheme "CI-macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk macosx -destination "platform=macOS" | mint run xcbeautify
+
+unbootstrap: 
+	@./Scripts/uninstall.sh
