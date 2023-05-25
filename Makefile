@@ -2,6 +2,8 @@ app_name := MyApp
 ios_device := iPhone 14
 ios_os := 16.4
 
+.PHONY: tuist bootstrap build run workspace module test_ios test_macos
+
 all: bootstrap run 
 ci: tuist workspace build test_macos test_ios
 ci_macos: tuist workspace build test_macos
@@ -9,11 +11,11 @@ ci_ios: tuist workspace build test_ios
 test: test_macos test_ios 
 
 bootstrap:
+	@./Scripts/homebrew.sh
 	@make tuist
 	@./Scripts/rename.sh
 	@./Scripts/hooks.sh
 
-.PHONY: tuist
 tuist: 
 	@./Scripts/tuist.sh
 
