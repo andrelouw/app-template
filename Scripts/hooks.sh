@@ -8,7 +8,6 @@ fi
 install_pre_commit() {
 	echo "⬇️  Installing pre-commit..."
 	brew install pre-commit
-
 }
 
 install_pre_commit_if_needed() {
@@ -28,8 +27,9 @@ install_pre_commit_if_needed() {
 
 bootstrap_hooks() {
     echo "⬇️  Installing git hooks..."
-    pre-commit install
-    pre_commit run
+    pre-commit install -f -t pre-commit
+	pre-commit install -f -t pre-push
+    pre-commit run
 }
 
 install_pre_commit_if_needed

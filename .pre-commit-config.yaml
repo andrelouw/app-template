@@ -12,8 +12,6 @@ repos:
         stages: [pre-commit]
     -   id: check-json
         stages: [pre-commit]
-    -   id: pretty-format-json
-        stages: [pre-commit]
     -   id: check-merge-conflict
         stages: [pre-commit]
 -   repo: https://github.com/realm/SwiftLint
