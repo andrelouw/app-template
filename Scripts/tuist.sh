@@ -8,18 +8,22 @@ install_tuist() {
 }
 
 install_tuist_if_needed() {
-	if ! eval $CHECK_TUIST; then 
-		while true; do
-			read -p "Do you wish to install Tuist? (y/n) " yn
-			case $yn in
-				[Yy]* ) install_tuist; break;;
-				[Nn]* ) echo "⛔️ Tuist required to continue, exiting!"; exit 1;;
-				* ) echo "Please answer y(yes) or n(no).";;
-			esac
-		done
+	if ! eval $CHECK_TUIST; then
+		if [[ -z "${CI}" ]]; then
+  			MY_SCRIPT_VARIABLE="Some default value because DEPLOY_ENV is undefined"
+		else
+			while true; do
+				read -p "Do you wish to install Tuist? (y/n) " yn
+				case $yn in
+					[Yy]* ) install_tuist; break;;
+					[Nn]* ) echo "⛔️ Tuist required to continue, exiting!"; exit 1;;
+					* ) echo "Please answer y(yes) or n(no).";;
+				esac
+			done
+		fi
 	else
 		echo "✅ Tuist installed "
 	fi
 }
- 
+
  install_tuist_if_needed
