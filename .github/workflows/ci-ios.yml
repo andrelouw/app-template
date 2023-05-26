@@ -1,8 +1,8 @@
 name: CI-iOS
 
 on:
-  push: 
-    branches: 
+  push:
+    branches:
       - develop
   pull_request:
     branches: [ develop ]
@@ -11,9 +11,9 @@ concurrency:
    group: ci-ios.${{ github.head_ref }}
    cancel-in-progress: true
 
-jobs: 
+jobs:
   build:
-    name: CI for macOS
+    name: CI for iOS
     runs-on: macos-13
 
     timeout-minutes: 10
@@ -22,22 +22,8 @@ jobs:
       - name: Check out project
         uses: actions/checkout@v3
 
-      # Get xcode version from project
-      - name: Determine Xcode Version
-        id: xcode-version
-        shell: bash
-        run: |
-          echo "::set-output name=version::$(cat .xcode-version)"
+      - name: Setup Environment
+        uses: ./.github/actions/configure-project
 
-      # Make sure we use the correct xcode version
-      - name: Select Xcode Version
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: ${{ steps.xcode-version.outputs.version }}
-
-      - name: Install 
-        run: brew install xcbeautify
-
-      - name: CI for IOS
+      - name: CI for iOS
         run: make ci_ios
-

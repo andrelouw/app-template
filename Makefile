@@ -2,36 +2,29 @@ app_name := MyApp
 ios_device := iPhone 14
 ios_os := 16.4
 
-.PHONY: tuist bootstrap build run workspace module test_ios test_macos rename clean format lint
+.PHONY: bootstrap build run workspace module test_ios test_macos rename clean format lint
 
 all: bootstrap rename run
-ci: tuist workspace build test_macos test_ios
-ci_macos: tuist workspace build test_macos
-ci_ios: tuist workspace build test_ios
+ci: --ci-bootstrap workspace build test_macos test_ios
+ci_macos: --ci-bootstrap workspace build test_macos
+ci_ios: --ci-bootstrap workspace build test_ios
 test: test_macos test_ios
 
-bootstrap:
-	@./Scripts/homebrew.sh
-	@./Scripts/mint.sh
-	@make tuist
-	@./Scripts/hooks.sh
+bootstrap: --homebrew --mint --mint --hooks
 
 rename:
 	@./Scripts/rename.sh
 
-tuist:
-	@./Scripts/tuist.sh
-
-build: tuist
+build: --tuist
 	@tuist build --clean
 
-run: tuist
+run: --tuist
 	@tuist generate
 
-workspace: tuist
+workspace: --tuist
 	@tuist generate --no-open
 
-module: tuist
+module: --tuist
 	@./Scripts/module.sh
 
 test_ios:
@@ -52,3 +45,17 @@ lint:
 
 unbootstrap:
 	@./Scripts/uninstall.sh
+
+--homebrew:
+	@./Scripts/homebrew.sh
+
+--mint:
+	@./Scripts/mint.sh
+
+--tuist:
+	@./Scripts/tuist.sh
+
+--hooks:
+	@./Scripts/hooks.sh
+
+--ci-bootstrap: --mint --tuist

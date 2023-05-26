@@ -2,13 +2,14 @@
 CHECK_MINT="command -v mint > /dev/null 2>&1"
 
 install_mint() {
-	echo "⬇️  Installing Homebrew..."
+	echo "⬇️  Installing Mint..."
 	brew install mint
 }
 
 install_mint_if_needed() {
-	if ! eval $CHECK_MINT; then 
-		while true; do
+	if ! eval $CHECK_MINT; then
+		if [[ -z "${CI}" ]]; then
+			while true; do
 			read -p "Do you wish to install mint? (y/n) " yn
 			case $yn in
 				[Yy]* ) install_mint; break;;
@@ -16,6 +17,10 @@ install_mint_if_needed() {
 				* ) echo "Please answer y(yes) or n(no).";;
 			esac
 		done
+		else
+			echo "⚙️ Running on CI, skipping confirmation step..."
+			install_mint
+		fi
 	else
 		echo "✅ Mint already installed "
 	fi
