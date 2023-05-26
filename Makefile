@@ -4,11 +4,11 @@ ios_os := 16.4
 
 .PHONY: tuist bootstrap build run workspace module test_ios test_macos rename clean format lint
 
-all: bootstrap rename run 
+all: bootstrap rename run
 ci: tuist workspace build test_macos test_ios
 ci_macos: tuist workspace build test_macos
 ci_ios: tuist workspace build test_ios
-test: test_macos test_ios 
+test: test_macos test_ios
 
 bootstrap:
 	@./Scripts/homebrew.sh
@@ -19,7 +19,7 @@ bootstrap:
 rename:
 	@./Scripts/rename.sh
 
-tuist: 
+tuist:
 	@./Scripts/tuist.sh
 
 build: tuist
@@ -34,16 +34,13 @@ workspace: tuist
 module: tuist
 	@./Scripts/module.sh
 
-test_ios: 
+test_ios:
 	@set -o pipefail && xcodebuild test -workspace ${app_name}.xcworkspace -scheme "CI-iOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=${ios_device},OS=${ios_os}" | mint run xcbeautify
 
 test_macos:
 	@set -o pipefail && xcodebuild test -workspace ${app_name}.xcworkspace -scheme "CI-macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk macosx -destination "platform=macOS" | mint run xcbeautify
 
-unbootstrap: 
-	@./Scripts/uninstall.sh
-
-clean: 
+clean:
 	@find . -name "*.xcodeproj" -type d -print0 | xargs -0 /bin/rm -r
 	@find . -name "*.xcworkspace" -type d -print0 | xargs -0 /bin/rm -r
 
@@ -52,3 +49,6 @@ format:
 
 lint:
 	@./Scripts/lint.sh
+
+unbootstrap:
+	@./Scripts/uninstall.sh
