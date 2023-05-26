@@ -1,0 +1,42 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+    -   id: check-yaml
+        stages: [pre-commit]
+    -   id: end-of-file-fixer
+        stages: [pre-commit]
+    -   id: trailing-whitespace
+        stages: [pre-commit]
+    -   id: check-added-large-files
+        stages: [pre-commit]
+    -   id: check-json
+        stages: [pre-commit]
+    -   id: check-merge-conflict
+        stages: [pre-commit]
+-   repo: https://github.com/realm/SwiftLint
+    rev: 0.52.2
+    hooks:
+    -   id: swiftlint
+        entry: swiftlint --fix --format --progress --config .swiftlint.yml
+        stages: [pre-commit]
+-   repo: https://github.com/nicklockwood/SwiftFormat/
+    rev: 0.51.10
+    hooks:
+    -   id: swiftformat
+        entry: swiftformat --config $DIR/../.swiftformat
+        stages: [pre-commit]
+-   repo: local
+    hooks:
+    -   id: test-ios
+        name: Local iOS Tests
+        language: system
+        entry: make test_ios
+        stages: [pre-push]
+        require_serial: true
+    -   id: test-mac
+        name: Local macOS Tests
+        language: system
+        entry: make test_macos
+        stages: [pre-push]
+        require_serial: true

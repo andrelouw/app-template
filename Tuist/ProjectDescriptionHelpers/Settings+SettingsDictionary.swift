@@ -13,10 +13,10 @@ extension SettingsDictionary {
     platformSet: PlatformSet
   ) -> Self {
     .init()
-    .supportedPlatforms(platformSet.supportedPlatforms)
-    .deploymentTargets(platformSet.supportedPlatforms)
-    .codeSigning(platformSet.supportedPlatforms)
-    .sdkRoot(platform: platformSet.base)
+      .supportedPlatforms(platformSet.supportedPlatforms)
+      .deploymentTargets(platformSet.supportedPlatforms)
+      .codeSigning(platformSet.supportedPlatforms)
+      .sdkRoot(platform: platformSet.base)
   }
 
   private func supportedPlatforms(_ platforms: Set<Platform>) -> SettingsDictionary {
@@ -51,7 +51,7 @@ extension SettingsDictionary {
     return merging(supportedPlatforms)
   }
 
-  func sdkRoot(platform: Platform) -> SettingsDictionary {
+  func sdkRoot(platform _: Platform) -> SettingsDictionary {
     var sdk = [String: SettingValue]()
     // TODO: Only assign this when there are more than on platform
     sdk["SDKROOT"] = "auto"

@@ -1,0 +1,27 @@
+name: "Setup Environment"
+description: "Install and setup cache for dependencies. Configure Xcode version."
+
+runs:
+  using: "composite"
+  steps:
+    # Setup caching for the `.mint` folder
+    - name: Cache Mints
+      uses: actions/cache@v3
+      with:
+        path: ~/.mint
+        key: ${{ runner.os }}-mint-${{ hashFiles('**/Mintfile') }}
+        restore-keys: |
+          ${{ runner.os }}-mint-
+
+    # Get xcode version from project
+    - name: Determine Xcode Version
+      id: xcode-version
+      shell: bash
+      run: |
+        echo "::set-output name=version::$(cat .xcode-version)"
+
+    # Make sure we use the correct xcode version
+    - name: Select Xcode Version
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: ${{ steps.xcode-version.outputs.version }}

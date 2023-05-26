@@ -1,5 +1,7 @@
 import ProjectDescription
 
+// MARK: - PlatformSet
+
 public struct PlatformSet {
   public let base: Platform
   public let supportedPlatforms: Set<Platform>
@@ -24,7 +26,7 @@ public struct PlatformSet {
 
   public func with(supportedPlatforms: Platform...) -> PlatformSet {
     PlatformSet(
-      base: self.base,
+      base: base,
       supportedPlatforms: Set(self.supportedPlatforms).union(supportedPlatforms)
     )
   }
@@ -36,7 +38,7 @@ extension Platform {
   }
 }
 
-extension Array where Element == Platform {
+extension [Platform] {
   public func asPlatformSet() -> PlatformSet {
     PlatformSet(platforms: self)
   }
