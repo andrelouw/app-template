@@ -9,4 +9,11 @@ repos:
     rev: 0.52.2
     hooks:
     -   id: swiftlint
-        entry: swiftlint --fix --progress --quiet  --config .swiftlint.yml
+        entry: swiftlint --fix --format --progres --config .swiftlint.yml
+        stages: [pre-commit]
+-   repo: https://github.com/nicklockwood/SwiftFormat/
+    rev: 0.51.10
+    hooks:
+    -   id: swiftformat
+        entry: swiftformat --config $DIR/../.swiftformat
+        stages: [pre-commit]
