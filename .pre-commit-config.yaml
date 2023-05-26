@@ -33,8 +33,10 @@ repos:
         language: system
         entry: make test_ios
         stages: [pre-push]
+        require_serial: true
     -   id: test-mac
         name: Local macOS Tests
         language: system
         entry: make test_macos
         stages: [pre-push]
+        require_serial: true
