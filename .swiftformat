@@ -10,20 +10,20 @@
 --indent 2 #indent
 --ifdef no-indent #indent
 --indentstrings true #indent
-# --wraparguments before-first # wrapArguments
-# --wrapparameters before-first # wrapArguments
-# --wrapcollections before-first # wrapArguments
-# --wrapconditions before-first # wrapArguments
+--wraparguments before-first # wrapArguments
+--wrapparameters before-first # wrapArguments
+--wrapcollections before-first # wrapArguments
+--wrapconditions before-first # wrapArguments
 # --wrapreturntype if-multiline #wrapArguments
-# --wrapeffects if-multiline #wrapArguments
-# --closingparen balanced # wrapArguments
-# --wraptypealiases before-first # wrapArguments
-# --funcattributes prev-line # wrapAttributes
-# --typeattributes prev-line # wrapAttributes
-# --wrapternary before-operators # wrap
+--wrapeffects if-multiline #wrapArgumentsq
+--closingparen balanced # wrapArguments
+--wraptypealiases before-first # wrapArguments
+--funcattributes prev-line # wrapAttributes
+--typeattributes prev-line # wrapAttributes
+--wrapternary before-operators # wrap
 # --structthreshold 20 # organizeDeclarations
 # --enumthreshold 20 # organizeDeclarations
-# --organizetypekkkkkjks class,struct,enum,extension,actor # organizeDeclarations
+# --organizetypes class,struct,enum,extension,actor # organizeDeclarations
 # --markcategories false # disable auto marks in code
 --extensionacl on-declarations # extensionAccessControl
 --patternlet inline # hoistPatternLet
