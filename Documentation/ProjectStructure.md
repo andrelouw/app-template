@@ -8,6 +8,7 @@ The remaining folders are like follows, see each section below for more detail o
 ├── Apps
 ├── Modules
 ├── Tuist
+├── TestPlans
 └── Workspace.swift
 ```
 
@@ -113,6 +114,9 @@ Modules/Features/Welcome
 The `Tuist` directory holds all the `ProjectDescriptionHelpers` which powers all the `Tuist` commands and automation.
 
 See [the Tuist docs](https://docs.tuist.io/guides/helpers) for more details.
+
+### Test Plans
+This directory contains the project's test plans.
 
 ### Workspace.swift
 The `Workspace.swift` file serves as the manifest to generate the main workspace for the project using [Tuist](#tuist).
