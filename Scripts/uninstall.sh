@@ -1,6 +1,7 @@
 #!/bin/bash
 CHECK_TUIST="command -v tuist > /dev/null 2>&1"
-CHECK_TUIST="command -v mint > /dev/null 2>&1"
+CHECK_MINT="command -v mint > /dev/null 2>&1"
+CHECK_PRE_COMMIT="command -v pre-commit > /dev/null 2>&1"
 
 uninstall_tuist() {
 	echo "🗑️  Uninstalling Tuist..."
@@ -64,8 +65,30 @@ uninstall_mints_if_needed() {
     done
 }
 
+uninstall_pre_commit() {
+	echo "🗑️  Uninstalling pre-commit..."
+	brew uninstall pre-commit
+    rm -rf ~/.cache/pre-commit
+}
+
+uninstall_pre_commit_if_needed() {
+	if eval $CHECK_PRE_COMMIT; then 
+		while true; do
+			read -p "Do you wish to uninstall pre-commit? (y/n) " yn
+			case $yn in
+				[Yy]* ) uninstall_pre_commit; break;;
+				[Nn]* ) echo "⏭️  Skipping pre_commit uninstall!"; break;;
+				* ) echo "Please answer y(yes) or n(no).";;
+			esac
+		done
+	else
+		echo "✅ Mint not found"
+	fi
+}
+
 uninstall_mints_if_needed
 uninstall_mint_if_needed
 uninstall_tuist_if_needed
+uninstall_pre_commit_if_needed
 
 echo "⚠️  Not uninstalling Homebrew, do that visit: https://osxdaily.com/2018/08/12/how-uninstall-homebrew-mac/"
