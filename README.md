@@ -32,3 +32,4 @@ See the [Tools](Documentation/Tools.md) page for all the tools used in this proj
 
 ## Caveats
 - Multiplatform `Feature` modules has not been tested yet, best to keep them to one platform for now
+- See issues list for improvments and outstanding features
