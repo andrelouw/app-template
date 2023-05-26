@@ -3,12 +3,19 @@ repos:
     rev: v2.3.0
     hooks:
     -   id: check-yaml
+        stages: [pre-commit]
     -   id: end-of-file-fixer
+        stages: [pre-commit]
     -   id: trailing-whitespace
+        stages: [pre-commit]
     -   id: check-added-large-files
+        stages: [pre-commit]
     -   id: check-json
+        stages: [pre-commit]
     -   id: pretty-format-json
+        stages: [pre-commit]
     -   id: check-merge-conflict
+        stages: [pre-commit]
 -   repo: https://github.com/realm/SwiftLint
     rev: 0.52.2
     hooks:
@@ -21,3 +28,15 @@ repos:
     -   id: swiftformat
         entry: swiftformat --config $DIR/../.swiftformat
         stages: [pre-commit]
+-   repo: local
+    hooks:
+    -   id: test-ios
+        name: Local iOS Tests
+        language: system
+        entry: make test_ios
+        stages: [pre-push]
+    -   id: test-mac
+        name: Local macOS Tests
+        language: system
+        entry: make test_macos
+        stages: [pre-push]
