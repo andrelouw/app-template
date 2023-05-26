@@ -9,9 +9,9 @@ runs:
       uses: actions/cache@v3
       with:
         path: ~/.mint
-        key: ${{ runner.os }}-pods-${{ hashFiles('**/Mintfile') }}
+        key: ${{ runner.os }}-mint-${{ hashFiles('**/Mintfile') }}
         restore-keys: |
-          ${{ runner.os }}-pods-
+          ${{ runner.os }}-mint-
 
     # Get xcode version from project
     - name: Determine Xcode Version
