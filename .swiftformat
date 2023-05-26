@@ -10,20 +10,21 @@
 --indent 2 #indent
 --ifdef no-indent #indent
 --indentstrings true #indent
---wraparguments before-first # wrapArguments
---wrapparameters before-first # wrapArguments
---wrapcollections before-first # wrapArguments
---wrapconditions before-first # wrapArguments
---wrapreturntype if-multiline #wrapArguments
---wrapeffects if-multiline #wrapArguments
---closingparen same-line # wrapArguments
---wraptypealiases before-first # wrapArguments
---funcattributes prev-line # wrapAttributes
---typeattributes prev-line # wrapAttributes
---wrapternary before-operators # wrap
---structthreshold 20 # organizeDeclarations
---enumthreshold 20 # organizeDeclarations
---organizetypes class,struct,enum,extension,actor # organizeDeclarations
+# --wraparguments before-first # wrapArguments
+# --wrapparameters before-first # wrapArguments
+# --wrapcollections before-first # wrapArguments
+# --wrapconditions before-first # wrapArguments
+# --wrapreturntype if-multiline #wrapArguments
+# --wrapeffects if-multiline #wrapArguments
+# --closingparen balanced # wrapArguments
+# --wraptypealiases before-first # wrapArguments
+# --funcattributes prev-line # wrapAttributes
+# --typeattributes prev-line # wrapAttributes
+# --wrapternary before-operators # wrap
+# --structthreshold 20 # organizeDeclarations
+# --enumthreshold 20 # organizeDeclarations
+# --organizetypekkkkkjks class,struct,enum,extension,actor # organizeDeclarations
+# --markcategories false # disable auto marks in code
 --extensionacl on-declarations # extensionAccessControl
 --patternlet inline # hoistPatternLet
 --redundanttype inferred # redundantType
@@ -44,8 +45,8 @@
 --rules extensionAccessControl
 --rules hoistPatternLet
 --rules indent
---rules markTypes
---rules organizeDeclarations
+# --rules markTypes
+# --rules organizeDeclarations
 --rules redundantParens
 --rules redundantReturn
 --rules redundantSelf

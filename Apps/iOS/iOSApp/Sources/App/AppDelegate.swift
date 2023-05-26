@@ -16,6 +16,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
   ) -> UISceneConfiguration {
     UISceneConfiguration(
       name: "Default Configuration",
-      sessionRole: connectingSceneSession.role)
+      sessionRole: connectingSceneSession.role
+    )
   }
 }
