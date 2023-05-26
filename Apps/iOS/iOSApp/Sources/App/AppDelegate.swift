@@ -6,18 +6,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     _: UIApplication,
     didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil
   ) -> Bool {
-    return true
+    true
   }
 
   func application(
-    _ application: UIApplication,
+    _: UIApplication,
     configurationForConnecting connectingSceneSession: UISceneSession,
-    options: UIScene.ConnectionOptions
+    options _: UIScene.ConnectionOptions
   ) -> UISceneConfiguration {
     UISceneConfiguration(
       name: "Default Configuration",
-      sessionRole: connectingSceneSession.role
-    )
+      sessionRole: connectingSceneSession.role)
   }
 }
-

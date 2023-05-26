@@ -1,5 +1,5 @@
-import UIKit
 import SwiftUI
+import UIKit
 
 public final class WelcomeViewController: UIHostingController<WelcomeView> {
   public init(appName: String) {
@@ -7,7 +7,7 @@ public final class WelcomeViewController: UIHostingController<WelcomeView> {
   }
 
   @available(*, unavailable)
-  required dynamic init?(coder aDecoder: NSCoder) {
+  required dynamic init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 }

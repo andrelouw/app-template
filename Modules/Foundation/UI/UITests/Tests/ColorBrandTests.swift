@@ -1,6 +1,6 @@
+import SwiftUI
 import UI
 import XCTest
-import SwiftUI
 
 final class ColorBrandTests: XCTestCase {
   func test_brandPrimary_matchesAssetsBrandPrimary() {

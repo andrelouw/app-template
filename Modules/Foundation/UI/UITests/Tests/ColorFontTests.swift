@@ -1,6 +1,6 @@
+import SwiftUI
 import UI
 import XCTest
-import SwiftUI
 
 final class ColorFontTests: XCTestCase {
   func test_fontPrimary_matchesAssetsFontPrimary() {

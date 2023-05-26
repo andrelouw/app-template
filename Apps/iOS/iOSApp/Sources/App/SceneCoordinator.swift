@@ -1,12 +1,12 @@
 import Core
 import UIKit
 
-final class SceneCoordinator : Coordinator {
+final class SceneCoordinator: Coordinator {
   private let window: UIWindow
   private var childCoordinators = [Coordinator]()
 
   init(scene: UIWindowScene) {
-    self.window = UIWindow(windowScene: scene)
+    window = UIWindow(windowScene: scene)
   }
 
   func start() {

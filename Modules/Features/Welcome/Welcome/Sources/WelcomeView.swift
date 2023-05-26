@@ -1,5 +1,5 @@
-import UI
 import SwiftUI
+import UI
 
 public struct WelcomeView: View {
   var appName: String
@@ -22,7 +22,7 @@ public struct WelcomeView: View {
 }
 
 struct WelcomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        WelcomeView(appName: "MyApp")
-    }
+  static var previews: some View {
+    WelcomeView(appName: "MyApp")
+  }
 }

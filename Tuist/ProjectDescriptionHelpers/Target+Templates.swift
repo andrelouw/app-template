@@ -1,7 +1,11 @@
 import ProjectDescription
 
 extension TargetScript {
-  static let linting = TargetScript.post(path: .relativeToRoot("Scripts/lint.sh"), name: "Run linting", basedOnDependencyAnalysis: false)
+  static let linting = TargetScript.post(
+    path: .relativeToRoot("Scripts/lint.sh"),
+    name: "Run linting",
+    basedOnDependencyAnalysis: false
+  )
 }
 
 extension Target {
@@ -25,7 +29,7 @@ extension Target {
       sources: ["\(name)App/Sources/**"],
       resources: ["\(name)App/Resources/**"],
       scripts: [
-        .linting
+        .linting,
       ],
       dependencies: dependencies,
       settings: .base(platformSet: platform.asPlatformSet())
@@ -45,7 +49,7 @@ extension Target {
       infoPlist: "\(name)Tests/Config/Info.plist",
       sources: ["\(name)Tests/Tests/**"],
       scripts: [
-        .linting
+        .linting,
       ],
       dependencies: dependencies,
       settings: .base(platformSet: platform)
@@ -67,7 +71,7 @@ extension Target {
       sources: ["\(name)/Sources/**"],
       resources: hasResources ? ["\(name)/Resources/**"] : [],
       scripts: [
-        .linting
+        .linting,
       ],
       dependencies: dependencies,
       settings: .base(platformSet: platform)

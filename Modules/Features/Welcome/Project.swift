@@ -4,8 +4,8 @@ import ProjectDescriptionHelpers
 let project = Project.featureModule(
   name: "Welcome",
   platform: .iOS,
-   dependencies: [
+  dependencies: [
     .foundation("Core"),
-    .foundation("UI")
+    .foundation("UI"),
   ]
 )

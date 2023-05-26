@@ -1,6 +1,6 @@
 import ProjectDescription
 
-public struct ProjectConfiguration {
+public enum ProjectConfiguration {
   public static let organizationName = "andrelouw"
   public static let bundleID = "com.andrelouw"
   public static let appName = "MyApp"

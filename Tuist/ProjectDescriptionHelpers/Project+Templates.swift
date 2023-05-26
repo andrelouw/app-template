@@ -22,9 +22,9 @@ extension Project {
           name: "\(name)App",
           platform: platform.asPlatformSet(),
           dependencies: [
-            .target(name: "\(name)App")
+            .target(name: "\(name)App"),
           ]
-        )
+        ),
       ],
       fileHeaderTemplate: .string("")
     )
@@ -66,9 +66,9 @@ extension Project {
           name: name,
           platform: platform,
           dependencies: [
-            .target(name: name)
+            .target(name: name),
           ]
-        )
+        ),
       ]
     )
   }
@@ -111,19 +111,18 @@ extension Project {
           name: name,
           platform: platform,
           dependencies: [
-            .target(name: name)
+            .target(name: name),
           ]
         ),
-         .makeAppTarget(
+        .makeAppTarget(
           name: name,
           productName: "\(name)App",
           platform: appPlatform,
           dependencies: [
-            .target(name: name)
+            .target(name: name),
           ]
-        )
+        ),
       ]
     )
   }
 }
-

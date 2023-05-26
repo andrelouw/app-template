@@ -8,17 +8,17 @@ import Foundation
 private class BundleFinder {}
 
 extension Foundation.Bundle {
-    /// Since UI is a framework, the bundle for classes within this module can be used directly.
-    static let module = Bundle(for: BundleFinder.self)
+  /// Since UI is a framework, the bundle for classes within this module can be used directly.
+  static let module = Bundle(for: BundleFinder.self)
 }
 
 // MARK: - Objective-C Bundle Accessor
 
 @objc
 public class UIResources: NSObject {
-    @objc public class var bundle: Bundle {
-        return .module
-    }
+  @objc public class var bundle: Bundle {
+    return .module
+  }
 }
 // swiftlint:enable all
 // swiftformat:enable all
