@@ -6,6 +6,7 @@ let project = Project.app(
   platform: .iOS,
   dependencies: [
     .foundation("Core"),
+    .foundation("UI"),
     .feature("Welcome")
   ]
 )

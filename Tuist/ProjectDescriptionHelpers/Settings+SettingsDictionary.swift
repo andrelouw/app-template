@@ -53,19 +53,20 @@ extension SettingsDictionary {
 
   func sdkRoot(platform: Platform) -> SettingsDictionary {
     var sdk = [String: SettingValue]()
+    sdk["SDKROOT"] = "auto"
 
-    switch platform {
-    case .iOS:
-      sdk["SDKROOT"] = "iphoneos"
-    case .macOS:
-      sdk["SDKROOT"] = "macosx"
-    case .tvOS:
-      sdk["SDKROOT"] = "appletvos"
-    case .watchOS:
-      sdk["SDKROOT"] = "watchos"
-    @unknown default:
-      return self
-    }
+//    switch platform {
+//    case .iOS:
+//      sdk["SDKROOT"] = "iphoneos"
+//    case .macOS:
+//      sdk["SDKROOT"] = "macosx"
+//    case .tvOS:
+//      sdk["SDKROOT"] = "appletvos"
+//    case .watchOS:
+//      sdk["SDKROOT"] = "watchos"
+//    @unknown default:
+//      return self
+//    }
 
     return merging(sdk)
   }

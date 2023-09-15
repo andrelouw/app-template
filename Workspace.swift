@@ -93,11 +93,13 @@ let macCIScheme = Scheme(
   buildAction: .buildAction(
     targets: [
       .foundation("Core"),
+      .foundation("UI"),
     ]
   ),
   testAction: .targets(
     [
       .foundation("Core"),
+      .foundation("UI"),
     ],
     attachDebugger: false
   )

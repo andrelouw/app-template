@@ -1,9 +1,11 @@
-name: CI
+name: CI-iOS
 
 on:
   push: 
     branches: 
       - develop
+  pull_request:
+    branches: [ develop ]
 
 concurrency:
    group: ci.${{ github.head_ref }}
@@ -13,6 +15,9 @@ jobs:
   build:
     name: Build Workspace
     runs-on: macos-latest
+
+    timeout-minutes: 10
+
     steps:
       - name: Check out project
         uses: actions/checkout@v3
@@ -33,5 +38,9 @@ jobs:
       - name: Build Project
         uses: tuist/tuist-action@0.13.0
         with:
-          command: 'test'
+          command: 'test build'
           arguments: '-c'
+
+      - name: Build Project
+        run: xcodebuild clean build test -workspace MyApp.xcworkspace -scheme "CI_iOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 14,OS=16.3" ONLY_ACTIVE_ARCH=YES
+
