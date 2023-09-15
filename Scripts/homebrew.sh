@@ -17,7 +17,7 @@ install_brews() {
 }
 
 install_homebrew_if_needed() {
-	if ! eval $CHECK_HOMEBREW; then 
+	if ! eval $CHECK_HOMEBREW; then
 		while true; do
 			read -p "Do you wish to install Homebrew? (y/n) " yn
 			case $yn in

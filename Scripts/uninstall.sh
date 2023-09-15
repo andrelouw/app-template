@@ -16,7 +16,7 @@ uninstall_mint() {
 
 unisntall_mints() {
     input="Mintfile"
-    while IFS= read -r line 
+    while IFS= read -r line
     do
         package=`echo $line | sed -e 's/\(^.*\/\)\(.*\)\(@.*$\)/\2/'`
         echo "🗑️  Unisntalling ${package}..."
@@ -25,7 +25,7 @@ unisntall_mints() {
 }
 
 uninstall_tuist_if_needed() {
-	if eval $CHECK_TUIST; then 
+	if eval $CHECK_TUIST; then
 		while true; do
 			read -p "Do you wish to uninstall tuist? (y/n) " yn
 			case $yn in
@@ -40,7 +40,7 @@ uninstall_tuist_if_needed() {
 }
 
 uninstall_mint_if_needed() {
-	if eval $CHECK_MINT; then 
+	if eval $CHECK_MINT; then
 		while true; do
 			read -p "Do you wish to uninstall mint? (y/n) " yn
 			case $yn in
@@ -72,7 +72,7 @@ uninstall_pre_commit() {
 }
 
 uninstall_pre_commit_if_needed() {
-	if eval $CHECK_PRE_COMMIT; then 
+	if eval $CHECK_PRE_COMMIT; then
 		while true; do
 			read -p "Do you wish to uninstall pre-commit? (y/n) " yn
 			case $yn in

@@ -30,12 +30,12 @@ select_platforms() {
             SELECTED_PLATFORMS+=(${PLATFORMS[reply - 1]})
         done
         [[ $SELECTED_PLATFORMS ]] && break
-    done   
+    done
 }
 
 create_module() {
     # Create array of platforms, separated by a `,`
-    platforms=$( IFS=$','; echo "${SELECTED_PLATFORMS[*]}" )    
+    platforms=$( IFS=$','; echo "${SELECTED_PLATFORMS[*]}" )
     # Create the module command name by lower casing the selected module
     module_command=`echo "$SELECTED_MODULE_TYPE" | awk '{print tolower($0)}'`
 
