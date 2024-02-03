@@ -10,7 +10,9 @@ ci_macos: --ci-bootstrap workspace build test_macos
 ci_ios: --ci-bootstrap workspace build test_ios
 test: test_macos test_ios
 
-bootstrap: --homebrew --mint --mint --hooks
+bootstrap: 
+	@./Scripts/mise.sh
+	# TODO: Setup tools like pre-commit
 
 rename:
 	@./Scripts/rename.sh
@@ -28,10 +30,10 @@ module: --tuist
 	@./Scripts/module.sh
 
 test_ios:
-	@set -o pipefail && xcodebuild test -workspace ${app_name}.xcworkspace -scheme "CI-iOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=${ios_device},OS=${ios_os}" | mint run xcbeautify
+	@set -o pipefail && xcodebuild test -workspace ${app_name}.xcworkspace -scheme "CI-iOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=${ios_device},OS=${ios_os}" | xcbeautify
 
 test_macos:
-	@set -o pipefail && xcodebuild test -workspace ${app_name}.xcworkspace -scheme "CI-macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk macosx -destination "platform=macOS" | mint run xcbeautify
+	@set -o pipefail && xcodebuild test -workspace ${app_name}.xcworkspace -scheme "CI-macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk macosx -destination "platform=macOS" | xcbeautify
 
 clean:
 	@find . -name "*.xcodeproj" -type d -print0 | xargs -0 /bin/rm -r
@@ -43,19 +45,13 @@ format:
 lint:
 	@./Scripts/lint.sh
 
-unbootstrap:
-	@./Scripts/uninstall.sh
-
---homebrew:
-	@./Scripts/homebrew.sh
-
---mint:
-	@./Scripts/mint.sh
-
 --tuist:
-	@./Scripts/tuist.sh
+	@mise install tuist
 
 --hooks:
-	@./Scripts/hooks.sh
+	@mise install pre-commit
 
---ci-bootstrap: --mint --tuist
+--xcbeautify:
+	@mise install xcbeautify
+
+--ci-bootstrap: --xcbeautify --tuist

@@ -1,3 +1,10 @@
 [tools]
 tuist = '3'
 xcodes = '1'
+pre-commit = '3'
+swiftlint = "0"
+swiftformat = "0"
+xcbeautify = "1"
+
+[plugins]
+xcbeautify = "https://github.com/andrelouw/asdf-xcbeautify"

@@ -1,8 +1,9 @@
 #!/bin/sh
+# TODO: Could possible delete this file
 CHECK_PRE_COMMIT="command -v pre-commit > /dev/null 2>&1"
 
 if [[ "$(uname -m)" == arm64 ]]; then
-    export PATH="/opt/homebrew/bin:$PATH"
+	export PATH="/opt/homebrew/bin:$PATH"
 fi
 
 install_pre_commit() {
@@ -15,9 +16,15 @@ install_pre_commit_if_needed() {
 		while true; do
 			read -p "Do you wish to install pre-commit? (y/n) " yn
 			case $yn in
-				[Yy]* ) install_pre_commit; break;;
-				[Nn]* ) echo "⛔️ pre-commit required for setup, exiting!"; exit 1;;
-				* ) echo "Please answer y(yes) or n(no).";;
+			[Yy]*)
+				install_pre_commit
+				break
+				;;
+			[Nn]*)
+				echo "⛔️ pre-commit required for setup, exiting!"
+				exit 1
+				;;
+			*) echo "Please answer y(yes) or n(no)." ;;
 			esac
 		done
 	else
@@ -26,10 +33,10 @@ install_pre_commit_if_needed() {
 }
 
 bootstrap_hooks() {
-    echo "⬇️  Installing git hooks..."
-    pre-commit install -f -t pre-commit
+	echo "⬇️  Installing git hooks..."
+	pre-commit install -f -t pre-commit
 	pre-commit install -f -t pre-push
-    pre-commit run
+	pre-commit run
 }
 
 install_pre_commit_if_needed
