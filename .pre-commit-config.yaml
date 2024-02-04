@@ -1,42 +1,158 @@
 repos:
--   repo: https://github.com/pre-commit/pre-commit-hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.3.0
     hooks:
-    -   id: check-yaml
+      - id: check-yaml
         stages: [pre-commit]
-    -   id: end-of-file-fixer
+      - id: end-of-file-fixer
         stages: [pre-commit]
-    -   id: trailing-whitespace
+      - id: trailing-whitespace
         stages: [pre-commit]
-    -   id: check-added-large-files
+      - id: check-added-large-files
         stages: [pre-commit]
-    -   id: check-json
+      - id: check-json
         stages: [pre-commit]
-    -   id: check-merge-conflict
+      - id: check-merge-conflict
         stages: [pre-commit]
--   repo: https://github.com/realm/SwiftLint
+  - repo: https://github.com/realm/SwiftLint
     rev: 0.52.2
     hooks:
-    -   id: swiftlint
+      - id: swiftlint
         entry: swiftlint --fix --format --progress --config .swiftlint.yml
         stages: [pre-commit]
--   repo: https://github.com/nicklockwood/SwiftFormat/
+  - repo: https://github.com/nicklockwood/SwiftFormat/
     rev: 0.51.10
     hooks:
-    -   id: swiftformat
+      - id: swiftformat
         entry: swiftformat --config $DIR/../.swiftformat
         stages: [pre-commit]
--   repo: local
+  - repo: local
     hooks:
-    -   id: test-ios
+      - id: test-ios
         name: Local iOS Tests
         language: system
         entry: make test_ios
         stages: [pre-push]
         require_serial: true
-    -   id: test-mac
+      - id: test-mac
         name: Local macOS Tests
         language: system
         entry: make test_macos
         stages: [pre-push]
         require_serial: true
+
+default_install_hook_types: [pre-commit, pre-push]
+# repos:
+# -   repo: https://github.com/pre-commit/pre-commit-hooks
+#     rev: v4.5.0
+#     hooks:
+#         -   id: check-yaml
+#             stages: [pre-commit]
+#         -   id: end-of-file-fixer
+#             stages: [pre-commit]
+#         -   id: trailing-whitespace
+#             stages: [pre-commit]
+#         -   id: check-added-large-files
+#             stages: [pre-commit]
+#         -   id: check-json
+#             stages: [pre-commit]
+#         -   id: check-merge-conflict
+#             stages: [pre-commit]
+#         -   id: trailing-whitespace
+#             stages: [pre-commit]
+#         -   id: check-executables-have-shebangs
+#             stages: [pre-commit]
+#         -   id: check-shebang-scripts-are-executable
+#             stages: [pre-commit]
+#         -   id: check-xml
+#             stages: [pre-commit]
+#         -   id: detect-private-key
+#             stages: [pre-commit]
+#         -   id: end-of-file-fixer
+#             stages: [pre-commit]
+#         # -   id: file-contents-sorter
+#         -   id: mixed-line-ending
+#             stages: [pre-commit]
+#         -   id: sort-simple-yaml
+#             stages: [pre-commit]
+# # -   repo: git://github.com/noahsark769/xcodeproj-sort-pre-commit-hook
+# #     rev: 1.1.1
+# #     hooks:
+# #     -   id: xcodeproj-sort
+# #         args: [--groups-position=above]
+# # # TODO: Requires setup
+# # -   repo: https://github.com/jorisroovers/gitlint
+# #     rev:  0.19.1
+# #     hooks:
+# #     -   id: gitlint
+# # -   repo: https://github.com/codingjoe/relint
+# #     rev: 1.4.0
+# #     hooks:
+# #     -   id: relint
+# #         args: [-W]  # optional, if you want to fail on warnings during commit
+# # -   repo: https://github.com/markdownlint/markdownlint
+# #     rev: v0.13.0
+# #     hooks:
+# #     -   id: markdownlint
+# -    repo: https://github.com/python-jsonschema/check-jsonschema
+#      rev: 0.27.1
+#      hooks:
+#      -   id: check-github-workflows
+#          stages: [pre-commit]
+#      -   id: check-github-actions
+#          stages: [pre-commit]
+# -   repo: https://github.com/codespell-project/codespell
+#     rev: v2.2.6
+#     hooks:
+#     -   id: codespell
+#         stages: [pre-commit]
+# -   repo: https://github.com/homebysix/pre-commit-macadmin
+#     rev: v1.14.0
+#     hooks:
+#     -   id: check-plists
+#         stages: [pre-commit]
+# -   repo:  https://github.com/milin/giticket
+#     rev: v1.3
+#     hooks:
+#     -   id:  giticket
+#         args: ['--regex=PROJ-[0-9]', '--format={ticket} {commit_msg}']  # Optional
+#         stages: [pre-commit]
+# -   repo: https://github.com/realm/SwiftLint
+#     rev: 0.54.0
+#     hooks:
+#     -   id: swiftlint
+#         alias: format
+#         args: [--fix, --format, --config, .swiftlint.yml]
+#         stages: [pre-commit]
+#     -   id: swiftlint
+#         alias: lint
+#         stages: [manual]
+#         args: [--strict, --config, .swiftlint.yml]
+# -   repo: https://github.com/nicklockwood/SwiftFormat/
+#     rev: 0.52.10
+#     hooks:
+#     -   id: swiftformat
+#         alias: format
+#         args: [--config, .swiftformat]
+#         stages: [pre-commit]
+#     -   id: swiftformat
+#         alias: lint
+#         stages: [manual]
+#         args: [--lint]
+# -   repo: local
+#     hooks:
+#         -   id: build
+#             name: Build project
+#             language: system
+#             entry: make build
+#             stages: [pre-push]
+#             require_serial: true
+#         -   id: test-ios
+#             alias: test
+#             name: Tests
+#             language: system
+#             entry: make test
+#             stages: [ pre-push ]
+#             require_serial: true
+#
+# # Which hooks should be installed when running pre-commit install

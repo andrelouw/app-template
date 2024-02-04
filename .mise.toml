@@ -1,10 +1,63 @@
+min_version = "2024.2.4"
+
 [tools]
-tuist = '3'
-xcodes = '1'
+# tuist = '3'
+# xcodes = '1'
 pre-commit = '3'
-swiftlint = "0"
-swiftformat = "0"
-xcbeautify = "1"
+# swiftlint = "0"
+# swiftformat = "0"
+# xcbeautify = "1"
+
+[settings]
+experimental = true # enable experimental features
+
+[tasks.build]
+description = "Build project"
+run = "tuist build"
+depends = ["bootstrap:tuist"]
+
+[tasks."build:clean"]
+description = "Clean Build project"
+run = "tuist build --clean"
+tool = "tuist"
+
+# [tasks.tuist]
+# run = "mise exec tuist -- tuist "
+
+[tasks.test]
+description = "Run all tests"
+depends = ["test:*"]
+# run = [
+#   "echo 'sting'",
+#   "echo 'testing'"
+# ]
+
+[tasks."test:unit"]
+description = "Run all unit tests"
+run = "echo unit testing..."
+[tasks."test:ui"]
+description = "Run all ui tests"
+run = "echo ui testing..."
+
+[tasks.ci]
+description = "Run CI tasks"
+depends = ['build', 'test']
 
 [plugins]
 xcbeautify = "https://github.com/andrelouw/asdf-xcbeautify"
+
+## Tasks - Bootstrap
+[tasks.bootstrap]
+description = "Bootstrap all tools that require setup after install"
+depends = ["bootstrap:*"]
+
+[tasks."bootstrap:tools"]
+description = "Bootstrap all tools managed with mise"
+run = "mise up -y"
+
+[tasks."bootstrap:pre-commit"]
+description = "Bootstrap pre-commit tool by installing required hooks"
+run = "pre-commit install"
+sources = ['.pre-commit-config.yaml']
+outputs = ['.git/hooks/pre-commit', '.git/hooks/pre-push']
+depends = ["bootstrap:tools"]
